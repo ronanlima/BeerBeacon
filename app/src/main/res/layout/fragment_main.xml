@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="br.beer.beerbeacon.MainActivityFragment"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <com.ramotion.foldingcell.FoldingCell
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -23,46 +24,263 @@
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_dark"
-            android:visibility="gone">
+            android:visibility="visible">
 
-            <TextView
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_torneira_desdobrado"
+                card_view:cardElevation="2dp"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:text="vamos ver o que aparece aqui"/>
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp">
+
+                    <ImageView
+                        android:id="@+id/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/colorAccent"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBottom="@+id/background"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/ll_legenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:layout_marginLeft="40dp">
+
+                            <TextView
+                                android:id="@+id/leg_ibu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="IBU"
+                                android:textColor="@color/colorWhite"/>
+                            <TextView
+                                android:id="@+id/leg_alcool"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Alcool %"
+                                android:textColor="@color/colorWhite"/>
+                            <TextView
+                                android:id="@+id/leg_cor"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Cor"
+                                android:textColor="@color/colorWhite"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/ll_valores"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:paddingBottom="4dp"
+                            android:layout_marginLeft="40dp">
+                            <TextView
+                                android:id="@+id/valor_ibu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="10,3"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/valor_alcool"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="7,7"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:id="@+id/valor_cor"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Escura"
+                                android:textColor="@color/colorWhite"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/content_cell"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_below="@+id/background"
+                        android:padding="5dp">
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Copo 200 ml - R$8,99"/>
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Copo 400 ml - R$13,99"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_solicitar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/content_cell"
+                        android:padding="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="45dp"
+                        android:text="Solicitar"
+                        android:background="@color/colorPrimary"/>
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/cell_title_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_torneira"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                card_view:cardElevation="2dp">
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="0.7"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:background="@color/colorAccent"
-                    android:padding="15dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
-                        android:src="@mipmap/beer"/>
+                        android:orientation="vertical"
+                        android:background="@color/colorAccent"
+                        android:padding="15dp"
+                        android:textAlignment="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:text="Preço atualizado em 13/02/17 às 12:13"/>
+                        <ImageView
+                            android:id="@+id/img_icon_beer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/beer"
+                            android:layout_marginLeft="5dp"/>
+
+                        <TextView
+                            android:id="@+id/preco_chopp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="10dp"
+                            android:textSize="10sp"
+                            android:textColor="@color/colorWhite"
+                            android:textAlignment="center"
+                            android:text="R$12,33"
+                            android:layout_marginLeft="10dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1.5"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.1"
+                            android:orientation="horizontal"
+                            android:weightSum="3"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/name_chopp"
+                                android:layout_width="0dp"
+                                android:layout_weight="3"
+                                android:layout_height="match_parent"
+                                android:text="Dogma Sei Lá das Quantas"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="0.9"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3"
+                                android:paddingLeft="10dp"
+                                android:paddingBottom="2dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="IBU"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="Alcool %"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cor"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="3"
+                                android:paddingLeft="10dp"
+                                android:paddingBottom="5dp">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="10,1"
+                                    android:textStyle="bold"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="7,7"
+                                    android:textStyle="bold"/>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:text="Escura"
+                                    android:textStyle="bold"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
+
         </FrameLayout>
 
     </com.ramotion.foldingcell.FoldingCell>
