@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.0.1_a3ad361c47e6e3bcc48b7cc76952965fd74baeb4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f83b00041ecfba705603fec40363416c7de69719">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_a666499a8ed10d8f20eaea1f868f548acf8f725d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.0.1_776e07e07e8078afdf7485528bbed4d4238b665d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.ramotion.foldingcell/folding-cell/1.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="48dbdfcaaa731f11ff6a9fcbee3cc0c96feded6e">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.ramotion.foldingcell-folding-cell-1.1.0_9bf268b7170b8cb858710b0161bc5ccd8959a020/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7b11b137b3f11f615557cc315ebc46c2a4b070d9">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_c61570a389d6d89e959c1abd9a5a5f7ab3ea2436/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.0.1_21ff58c3b98d4f2edb5665f068b01ab40a19f6d3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="297d4bcf6ed4e747a1bf7d0d094a2d911a8d3a8e">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-25.0.1_19cc03915c3d71b5efff332e1972a6430c576596/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c5b7145fb34779b6639147b8f2f8dd77c0db771b">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_d4e23bce963d87e4d0bb9596931266c9b309b2c9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="70a24d1dcfcf837e3c9c2692eb64fad0b4f7bc74">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_64ee1a7f3130a79d86c2fef780f9cc14ea313151/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_e1f75b9645b1862889593955a72a74568068ffb8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="26c6eef571592c91f29e56fda0bac73321de0c92">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-25.0.1_65fd8ab576a4967735fbf2b0a38da5a355c7a52f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bc7e99e8d0fc279a05aa91378530f467ad62d443">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-25.0.1_d0949d3cfdd7d53c45d9ba63be34012d0ed43e3f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1108575c7dc7b7f5b378b3290ac90de81a9b8830">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-cardview-v7-25.0.1_35f149b36a493cb4b2efc133d8423bde91f4a3c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="772bed2d992b67b9d0327f766cc95cd63031dcd3">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-25.0.1_4c474006cb0534ef60d8c2ba9142c2cba8f88291/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.0.1_9b64320e501bdc6e2a9a5c3f21c38f45314806cf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/design/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3b236883e0df6002cabb01ce57d00a5b1e5de610">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-25.0.1_51e8d7c59382aa2d495cfac5af30d75b99936592/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.0.1_d141206aa28d58f4c9ea6cc7c764d6928a05a3bf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_187ec795a24ccbb8752f711071920e6c3fd0e701/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.1/support-annotations-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a09194311f8f89c3e6db09d79f50897a889d615e">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.0.1_62ad97ef040cea241c8a855232a6064a3f405f5e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/transition/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c1b6ab157e8e12cb08b9ee82bb5e3c5d22632eb3">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-transition-25.0.1_8d8a753ad74e91ce014f022529c1c3c36e1e3c38/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.1_a8c0ab4eaeda8422f53b8cd341574a4989c97c15/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/Users/ronanlima/Git/StudioProjects/BeerBeacon/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_9677e7a5359761aa6a782d5af827706d57776f62/classes.dex" />
+    </item>
+
+</items>
