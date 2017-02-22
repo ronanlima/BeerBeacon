@@ -7,18 +7,29 @@ import java.util.List;
  * Created by Ronan.lima on 14/02/17.
  */
 public class Tonel {
-    private String nomeChopp, ibu, alcool, cor;
+    private String marca, nomeChopp, ibu, abv, estilo;
+    private Double volume;
+    //FIXME remover esses atributos futuramente
+    private String data, hora;
     private List<Double> preco;
     private List<String> descricaoChopp;
 
-    public Tonel(String nomeChopp, String ibu, String alcool, String cor, List<Double> preco, List<String> descricaoChopp) {
+    public Tonel(String marca, String nomeChopp, String ibu, String abv, String estilo, Double volume) {
+        setMarca(marca);
         setNomeChopp(nomeChopp);
         setIbu(ibu);
-        setAlcool(alcool);
-        setCor(cor);
+        setAbv(abv);
+        setEstilo(estilo);
         setPreco(new ArrayList<Double>());
         setDescricaoChopp(new ArrayList<String>());
+        setData("Hoje");
+        setHora("12:53");
+        setVolume(volume);
     }
+
+    public String getMarca() { return marca; }
+
+    public void setMarca(String marca) { this.marca = marca; }
 
     public String getNomeChopp() {
         return nomeChopp;
@@ -36,21 +47,13 @@ public class Tonel {
         this.ibu = ibu;
     }
 
-    public String getAlcool() {
-        return alcool;
-    }
+    public String getAbv() { return abv; }
 
-    public void setAlcool(String alcool) {
-        this.alcool = alcool;
-    }
+    public void setAbv(String abv) { this.abv = abv; }
 
-    public String getCor() {
-        return cor;
-    }
+    public String getEstilo() { return estilo; }
 
-    public void setCor(String cor) {
-        this.cor = cor;
-    }
+    public void setEstilo(String estilo) { this.estilo = estilo; }
 
     public List<Double> getPreco() {
         return preco;
@@ -64,7 +67,29 @@ public class Tonel {
         return descricaoChopp;
     }
 
-    public void setDescricaoChopp(List<String> descricaoChopp) {
-        this.descricaoChopp = descricaoChopp;
+    public void setDescricaoChopp(List<String> descricaoChopp) { this.descricaoChopp = descricaoChopp; }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
     }
 }

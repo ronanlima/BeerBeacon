@@ -1,10 +1,10 @@
 package br.beer.beerbeacon;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
@@ -12,18 +12,22 @@ import com.ramotion.foldingcell.FoldingCell;
 import java.util.HashSet;
 import java.util.List;
 
+import br.beer.beerbeacon.bean.Tonel;
+
 /**
  * Simple example of ListAdapter for using with Folding Cell
  * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
  */
-public class FoldingCellListAdapter extends ArrayAdapter<Item> {
+public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHolder> {
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
+    private Context mContext;
+    private List<Tonel> items;
 
-
-    public FoldingCellListAdapter(Context context, List<Item> objects) {
-        super(context, 0, objects);
+    public FoldingCellListAdapter(Context context, List<Tonel> objects) {
+        this.mContext = context;
+        setItems(objects);
     }
 
     @Override
@@ -32,21 +36,21 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         Item item = getItem(position);
         // if cell is exists - reuse it, if not - create the new one from resource
         FoldingCell cell = (FoldingCell) convertView;
-        ViewHolder viewHolder;
+        TorneiraViewHolder torneiraViewHolder;
         if (cell == null) {
-            viewHolder = new ViewHolder();
+            torneiraViewHolder = new TorneiraViewHolder();
             LayoutInflater vi = LayoutInflater.from(getContext());
             cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
             // binding view parts to view holder
-            viewHolder.price = (TextView) cell.findViewById(R.id.title_price);
-            viewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
-            viewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
-            viewHolder.fromAddress = (TextView) cell.findViewById(R.id.title_from_address);
-            viewHolder.toAddress = (TextView) cell.findViewById(R.id.title_to_address);
-            viewHolder.requestsCount = (TextView) cell.findViewById(R.id.title_requests_count);
-            viewHolder.pledgePrice = (TextView) cell.findViewById(R.id.title_pledge);
-            viewHolder.contentRequestBtn = (TextView) cell.findViewById(R.id.content_request_btn);
-            cell.setTag(viewHolder);
+            torneiraViewHolder.preco = (TextView) cell.findViewById(R.id.title_price);
+            torneiraViewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
+            torneiraViewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
+            torneiraViewHolder.marcaChopp = (TextView) cell.findViewById(R.id.marca_chopp);
+            torneiraViewHolder.nomeChopp = (TextView) cell.findViewById(R.id.nome_chopp);
+            torneiraViewHolder.ibu = (TextView) cell.findViewById(R.id.label_ibu);
+            torneiraViewHolder.abv = (TextView) cell.findViewById(R.id.label_abv);
+            torneiraViewHolder.btnSolicitar = (TextView) cell.findViewById(R.id.btn_solicitar);
+            cell.setTag(torneiraViewHolder);
         } else {
             // for existing cell set valid valid state(without animation)
             if (unfoldedIndexes.contains(position)) {
@@ -54,24 +58,24 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
             } else {
                 cell.fold(true);
             }
-            viewHolder = (ViewHolder) cell.getTag();
+            torneiraViewHolder = (TorneiraViewHolder) cell.getTag();
         }
 
         // bind data from selected element to view through view holder
-        viewHolder.price.setText(item.getPrice());
-        viewHolder.time.setText(item.getTime());
-        viewHolder.date.setText(item.getDate());
-        viewHolder.fromAddress.setText(item.getFromAddress());
-        viewHolder.toAddress.setText(item.getToAddress());
-        viewHolder.requestsCount.setText(String.valueOf(item.getRequestsCount()));
-        viewHolder.pledgePrice.setText(item.getPledgePrice());
+        torneiraViewHolder.preco.setText(item.getPrice());
+        torneiraViewHolder.time.setText(item.getTime());
+        torneiraViewHolder.date.setText(item.getDate());
+        torneiraViewHolder.marcaChopp.setText(item.getFromAddress());
+        torneiraViewHolder.nomeChopp.setText(item.getToAddress());
+        torneiraViewHolder.ibu.setText(String.valueOf(item.getRequestsCount()));
+        torneiraViewHolder.abv.setText(item.getPledgePrice());
 
         // set custom btn handler for list item from that item
         if (item.getRequestBtnClickListener() != null) {
-            viewHolder.contentRequestBtn.setOnClickListener(item.getRequestBtnClickListener());
+            torneiraViewHolder.btnSolicitar.setOnClickListener(item.getRequestBtnClickListener());
         } else {
             // (optionally) add "default" handler if no handler found in item
-            viewHolder.contentRequestBtn.setOnClickListener(defaultRequestBtnClickListener);
+            torneiraViewHolder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
         }
 
 
@@ -102,15 +106,128 @@ public class FoldingCellListAdapter extends ArrayAdapter<Item> {
         this.defaultRequestBtnClickListener = defaultRequestBtnClickListener;
     }
 
-    // View lookup cache
-    private static class ViewHolder {
-        TextView price;
-        TextView contentRequestBtn;
-        TextView pledgePrice;
-        TextView fromAddress;
-        TextView toAddress;
-        TextView requestsCount;
-        TextView date;
-        TextView time;
+    @Override
+    public TorneiraViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.cell, parent, false);
+        return new TorneiraViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        return getItems() != null ? getItems().size() : 0;
+    }
+
+    @Override
+    public void onBindViewHolder(TorneiraViewHolder holder, int position) {
+        /** Criar Textviews/checkboxes de acordo com a quantidade de preços (isso indica que há + de
+         * 1 copo de chopp. Para isso, usar a classe LinearLayout.Params para copiar o textview/checkbox
+         * do primeiro elemento e replicar quantas vezes for necessário. **/
+        holder.getPreco().setText(getItems().get(position).getPreco().toString());
+        holder.getNomeChopp().setText(getItems().get(position).getVolume() + " - " + getItems().get(position).getNomeChopp()
+                + "(" + holder.getPreco().getText() + ")");
+        /** **/
+        holder.getTime().setText(getItems().get(position).getHora());
+        holder.getDate().setText(getItems().get(position).getData());
+        holder.getMarcaChopp().setText(getItems().get(position).getMarca());
+        holder.getIbu().setText(getItems().get(position).getIbu());
+        holder.getAbv().setText(getItems().get(position).getAbv());
+        holder.getEstilo().setText(getItems().get(position).getEstilo());
+    }
+
+    public List<Tonel> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Tonel> items) {
+        this.items = items;
+    }
+}
+
+class TorneiraViewHolder extends RecyclerView.ViewHolder {
+    TextView preco, btnSolicitar, abv, marcaChopp, nomeChopp, ibu, estilo, date, time;
+
+    public TorneiraViewHolder(View itemView) {
+        super(itemView);
+        setPreco((TextView) itemView.findViewById(R.id.title_price));
+        setTime((TextView) itemView.findViewById(R.id.title_time_label));
+        setDate((TextView) itemView.findViewById(R.id.title_date_label));
+        setMarcaChopp((TextView) itemView.findViewById(R.id.marca_chopp));
+        setNomeChopp((TextView) itemView.findViewById(R.id.nome_chopp));
+        setIbu((TextView) itemView.findViewById(R.id.value_ibu));
+        setAbv((TextView) itemView.findViewById(R.id.value_abv));
+        setEstilo((TextView) itemView.findViewById(R.id.value_estilo));
+        setBtnSolicitar((TextView) itemView.findViewById(R.id.btn_solicitar));
+    }
+
+    public TextView getPreco() {
+        return preco;
+    }
+
+    public void setPreco(TextView preco) {
+        this.preco = preco;
+    }
+
+    public TextView getBtnSolicitar() {
+        return btnSolicitar;
+    }
+
+    public void setBtnSolicitar(TextView btnSolicitar) {
+        this.btnSolicitar = btnSolicitar;
+    }
+
+    public TextView getAbv() {
+        return abv;
+    }
+
+    public void setAbv(TextView abv) {
+        this.abv = abv;
+    }
+
+    public TextView getMarcaChopp() {
+        return marcaChopp;
+    }
+
+    public void setMarcaChopp(TextView marcaChopp) {
+        this.marcaChopp = marcaChopp;
+    }
+
+    public TextView getNomeChopp() {
+        return nomeChopp;
+    }
+
+    public void setNomeChopp(TextView nomeChopp) {
+        this.nomeChopp = nomeChopp;
+    }
+
+    public TextView getIbu() {
+        return ibu;
+    }
+
+    public void setIbu(TextView ibu) {
+        this.ibu = ibu;
+    }
+
+    public TextView getEstilo() {
+        return estilo;
+    }
+
+    public void setEstilo(TextView estilo) {
+        this.estilo = estilo;
+    }
+
+    public TextView getDate() {
+        return date;
+    }
+
+    public void setDate(TextView date) {
+        this.date = date;
+    }
+
+    public TextView getTime() {
+        return time;
+    }
+
+    public void setTime(TextView time) {
+        this.time = time;
     }
 }

@@ -6,9 +6,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
+import com.estimote.sdk.EstimoteSDK;
 import com.estimote.sdk.Region;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.UUID;
  */
 
 public class BeerApplication extends Application {
+    public static final String TAG = BeerApplication.class.getCanonicalName().toUpperCase();
 
     private BeaconManager beaconManager;
 
@@ -26,7 +29,10 @@ public class BeerApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        EstimoteSDK.initialize(getApplicationContext(), "beerbeacon-lju", "a97dcc9e7ad472e291b61cc8680297dc");
+        EstimoteSDK.enableDebugLogging(true);
         beaconManager = new BeaconManager(getApplicationContext());
+
         beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
             @Override
             public void onEnteredRegion(Region region, List<Beacon> list) {
@@ -36,7 +42,7 @@ public class BeerApplication extends Application {
 
             @Override
             public void onExitedRegion(Region region) {
-
+                Log.i(TAG, "Saiu do range do beacon "+region.getIdentifier());
             }
         });
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
@@ -44,8 +50,8 @@ public class BeerApplication extends Application {
             public void onServiceReady() {
                 beaconManager.startMonitoring(new Region(
                         "regiao monitorada",
-                        UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D"),
-                        5653, 53208
+                        UUID.fromString("44febbad-3a05-b196-516b-01df2cd8ea15"),
+                        null, null
                 ));
             }
         });

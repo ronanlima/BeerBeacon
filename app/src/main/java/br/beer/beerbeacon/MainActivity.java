@@ -15,10 +15,6 @@ import java.util.ArrayList;
 /**
  * Example of using Folding Cell with ListView and ListAdapter
  */
-
-/**
- * Example of using Folding Cell with ListView and ListAdapter
- */
 public class MainActivity extends AppCompatActivity {
 
     @Override

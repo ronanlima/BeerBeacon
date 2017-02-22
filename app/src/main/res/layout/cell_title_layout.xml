@@ -67,7 +67,7 @@
             android:src="@drawable/from_to_purple" />
 
         <TextView
-            android:id="@+id/title_from_address"
+            android:id="@+id/marca_chopp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/title_from_to_dots"
@@ -83,14 +83,14 @@
             android:id="@+id/title_from_to_dots_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@id/title_from_address"
+            android:layout_below="@id/marca_chopp"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/title_from_to_dots"
             android:src="@color/contentDividerLine" />
 
         <TextView
-            android:id="@+id/title_to_address"
+            android:id="@+id/nome_chopp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_from_to_dots_divider"
@@ -103,7 +103,7 @@
 
 
         <TextView
-            android:id="@+id/title_requests_count"
+            android:id="@+id/label_ibu"
             style="@style/TitleBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,14 +112,15 @@
 
         <TextView
             style="@style/TitleBadgeTitle"
+            android:id="@+id/value_ibu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_requests_count"
-            android:layout_alignStart="@id/title_requests_count"
+            android:layout_above="@id/label_ibu"
+            android:layout_alignStart="@id/label_ibu"
             android:text="@string/requests_count_badge" />
 
         <TextView
-            android:id="@+id/title_weight"
+            android:id="@+id/label_estilo"
             style="@style/TitleBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,14 +130,15 @@
 
         <TextView
             style="@style/TitleBadgeTitle"
+            android:id="@+id/value_estilo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_weight"
-            android:layout_alignStart="@id/title_weight"
+            android:layout_above="@id/label_estilo"
+            android:layout_alignStart="@id/label_estilo"
             android:text="@string/weight_badge" />
 
         <TextView
-            android:id="@+id/title_pledge"
+            android:id="@+id/label_abv"
             style="@style/TitleBadgeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,10 +147,11 @@
 
         <TextView
             style="@style/TitleBadgeTitle"
+            android:id="@+id/value_abv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_pledge"
-            android:layout_alignStart="@id/title_pledge"
+            android:layout_above="@id/label_abv"
+            android:layout_alignStart="@id/label_abv"
             android:text="@string/pledge_badge" />
 
     </RelativeLayout>
