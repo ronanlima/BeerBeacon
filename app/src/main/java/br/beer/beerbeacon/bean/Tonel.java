@@ -1,5 +1,7 @@
 package br.beer.beerbeacon.bean;
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Tonel {
     private String data, hora;
     private List<Double> preco;
     private List<String> descricaoChopp;
+    private View.OnClickListener requestBtnClickListener;
 
     public Tonel(String marca, String nomeChopp, String ibu, String abv, String estilo, Double volume) {
         setMarca(marca);
@@ -25,6 +28,15 @@ public class Tonel {
         setData("Hoje");
         setHora("12:53");
         setVolume(volume);
+    }
+
+    public static ArrayList<Tonel> getTonelList() {
+        ArrayList<Tonel> lista = new ArrayList<>();
+        lista.add(new Tonel("Dogma", "Hopp Lagger", "10,1", "7,3", "Lagger", 200d));
+        lista.add(new Tonel("Colorado", "Colorado SeiLaOQuê", "9,8", "7,3", "ABC", 200d));
+        lista.add(new Tonel("Eisenbhan", "Eisenbhan Weizenbier", "6,2", "4,3", "Weizenbier", 200d));
+        lista.add(new Tonel("Brahma", "Extra", "5,2", "7,3", "Lagger", 200d));
+        return lista;
     }
 
     public String getMarca() { return marca; }
@@ -91,5 +103,12 @@ public class Tonel {
 
     public void setVolume(Double volume) {
         this.volume = volume;
+    }
+    public View.OnClickListener getRequestBtnClickListener() {
+        return requestBtnClickListener;
+    }
+
+    public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
+        this.requestBtnClickListener = requestBtnClickListener;
     }
 }

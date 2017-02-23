@@ -18,7 +18,7 @@ import br.beer.beerbeacon.bean.Tonel;
  * Simple example of ListAdapter for using with Folding Cell
  * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
  */
-public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHolder> {
+public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHolder> implements View.OnClickListener {
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
     private View.OnClickListener defaultRequestBtnClickListener;
@@ -30,57 +30,57 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
         setItems(objects);
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // get item for selected view
-        Item item = getItem(position);
-        // if cell is exists - reuse it, if not - create the new one from resource
-        FoldingCell cell = (FoldingCell) convertView;
-        TorneiraViewHolder torneiraViewHolder;
-        if (cell == null) {
-            torneiraViewHolder = new TorneiraViewHolder();
-            LayoutInflater vi = LayoutInflater.from(getContext());
-            cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
-            // binding view parts to view holder
-            torneiraViewHolder.preco = (TextView) cell.findViewById(R.id.title_price);
-            torneiraViewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
-            torneiraViewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
-            torneiraViewHolder.marcaChopp = (TextView) cell.findViewById(R.id.marca_chopp);
-            torneiraViewHolder.nomeChopp = (TextView) cell.findViewById(R.id.nome_chopp);
-            torneiraViewHolder.ibu = (TextView) cell.findViewById(R.id.label_ibu);
-            torneiraViewHolder.abv = (TextView) cell.findViewById(R.id.label_abv);
-            torneiraViewHolder.btnSolicitar = (TextView) cell.findViewById(R.id.btn_solicitar);
-            cell.setTag(torneiraViewHolder);
-        } else {
-            // for existing cell set valid valid state(without animation)
-            if (unfoldedIndexes.contains(position)) {
-                cell.unfold(true);
-            } else {
-                cell.fold(true);
-            }
-            torneiraViewHolder = (TorneiraViewHolder) cell.getTag();
-        }
-
-        // bind data from selected element to view through view holder
-        torneiraViewHolder.preco.setText(item.getPrice());
-        torneiraViewHolder.time.setText(item.getTime());
-        torneiraViewHolder.date.setText(item.getDate());
-        torneiraViewHolder.marcaChopp.setText(item.getFromAddress());
-        torneiraViewHolder.nomeChopp.setText(item.getToAddress());
-        torneiraViewHolder.ibu.setText(String.valueOf(item.getRequestsCount()));
-        torneiraViewHolder.abv.setText(item.getPledgePrice());
-
-        // set custom btn handler for list item from that item
-        if (item.getRequestBtnClickListener() != null) {
-            torneiraViewHolder.btnSolicitar.setOnClickListener(item.getRequestBtnClickListener());
-        } else {
-            // (optionally) add "default" handler if no handler found in item
-            torneiraViewHolder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
-        }
-
-
-        return cell;
-    }
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        // get item for selected view
+//        Item item = getItem(position);
+//        // if cell is exists - reuse it, if not - create the new one from resource
+//        FoldingCell cell = (FoldingCell) convertView;
+//        TorneiraViewHolder torneiraViewHolder;
+//        if (cell == null) {
+//            torneiraViewHolder = new TorneiraViewHolder();
+//            LayoutInflater vi = LayoutInflater.from(getContext());
+//            cell = (FoldingCell) vi.inflate(R.layout.cell, parent, false);
+//            // binding view parts to view holder
+//            torneiraViewHolder.preco = (TextView) cell.findViewById(R.id.title_price);
+//            torneiraViewHolder.time = (TextView) cell.findViewById(R.id.title_time_label);
+//            torneiraViewHolder.date = (TextView) cell.findViewById(R.id.title_date_label);
+//            torneiraViewHolder.marcaChopp = (TextView) cell.findViewById(R.id.marca_chopp);
+//            torneiraViewHolder.nomeChopp = (TextView) cell.findViewById(R.id.nome_chopp);
+//            torneiraViewHolder.ibu = (TextView) cell.findViewById(R.id.label_ibu);
+//            torneiraViewHolder.abv = (TextView) cell.findViewById(R.id.label_abv);
+//            torneiraViewHolder.btnSolicitar = (TextView) cell.findViewById(R.id.btn_solicitar);
+//            cell.setTag(torneiraViewHolder);
+//        } else {
+//            // for existing cell set valid valid state(without animation)
+//            if (unfoldedIndexes.contains(position)) {
+//                cell.unfold(true);
+//            } else {
+//                cell.fold(true);
+//            }
+//            torneiraViewHolder = (TorneiraViewHolder) cell.getTag();
+//        }
+//
+//        // bind data from selected element to view through view holder
+//        torneiraViewHolder.preco.setText(item.getPrice());
+//        torneiraViewHolder.time.setText(item.getTime());
+//        torneiraViewHolder.date.setText(item.getDate());
+//        torneiraViewHolder.marcaChopp.setText(item.getFromAddress());
+//        torneiraViewHolder.nomeChopp.setText(item.getToAddress());
+//        torneiraViewHolder.ibu.setText(String.valueOf(item.getRequestsCount()));
+//        torneiraViewHolder.abv.setText(item.getPledgePrice());
+//
+//        // set custom btn handler for list item from that item
+//        if (item.getRequestBtnClickListener() != null) {
+//            torneiraViewHolder.btnSolicitar.setOnClickListener(item.getRequestBtnClickListener());
+//        } else {
+//            // (optionally) add "default" handler if no handler found in item
+//            torneiraViewHolder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
+//        }
+//
+//
+//        return cell;
+//    }
 
     // simple methods for register cell state changes
     public void registerToggle(int position) {
@@ -132,6 +132,14 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
         holder.getIbu().setText(getItems().get(position).getIbu());
         holder.getAbv().setText(getItems().get(position).getAbv());
         holder.getEstilo().setText(getItems().get(position).getEstilo());
+
+        // set custom btn handler for list item from that item
+        if (getItems().get(position).getRequestBtnClickListener() != null) {
+            holder.btnSolicitar.setOnClickListener(getItems().get(position).getRequestBtnClickListener());
+        } else {
+            // (optionally) add "default" handler if no handler found in item
+            holder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
+        }
     }
 
     public List<Tonel> getItems() {
@@ -140,6 +148,11 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
     public void setItems(List<Tonel> items) {
         this.items = items;
+    }
+
+    @Override
+    public void onClick(View view) {
+        registerToggle(0);
     }
 }
 

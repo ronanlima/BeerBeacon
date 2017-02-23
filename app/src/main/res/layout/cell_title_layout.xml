@@ -1,158 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bgContent"
     android:baselineAligned="false"
-    android:orientation="horizontal">
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="4dp"
+    android:layout_margin="4dp">
 
-    <!-- LEFT TITLE PART -->
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:layout_weight="3"
-        android:background="@color/bgTitleLeft"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="20dp">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/title_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="26sp" />
-
-        <TextView
-            android:id="@+id/title_time_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/title_date_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/title_time_label"
-            android:layout_alignParentStart="true"
-            android:textColor="@android:color/white"
-            android:textSize="12sp" />
-
-
-    </RelativeLayout>
-    <!-- RIGHT TITLE PART -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@color/bgTitleRight"
-        android:paddingBottom="20dp"
-        android:paddingEnd="20dp"
-        android:paddingStart="15dp"
-        android:paddingTop="20dp">
-
-        <ImageView
-            android:id="@+id/title_from_to_dots"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/from_to_purple" />
-
-        <TextView
-            android:id="@+id/marca_chopp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/title_from_to_dots"
-            android:layout_marginTop="-5dp"
-            android:layout_toEndOf="@+id/title_from_to_dots"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
-
-        <ImageView
-            android:id="@+id/title_from_to_dots_divider"
+        <!-- LEFT TITLE PART -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/marca_chopp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_toEndOf="@+id/title_from_to_dots"
-            android:src="@color/contentDividerLine" />
+            android:layout_height="155dp"
+            android:layout_weight="3"
+            android:background="@color/bgTitleLeft"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="20dp">
 
-        <TextView
-            android:id="@+id/nome_chopp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/title_from_to_dots_divider"
-            android:layout_toEndOf="@id/title_from_to_dots"
-            android:ellipsize="marquee"
-            android:fadingEdge="horizontal"
-            android:singleLine="true"
-            android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/title_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:textColor="@android:color/white"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/title_time_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/title_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/title_time_label"
+                android:layout_alignParentStart="true"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
 
 
-        <TextView
-            android:id="@+id/label_ibu"
-            style="@style/TitleBadgeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+        </RelativeLayout>
+        <!-- RIGHT TITLE PART -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/bgTitleRight"
+            android:paddingBottom="20dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="15dp"
+            android:paddingTop="20dp">
 
-        <TextView
-            style="@style/TitleBadgeTitle"
-            android:id="@+id/value_ibu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/label_ibu"
-            android:layout_alignStart="@id/label_ibu"
-            android:text="@string/requests_count_badge" />
+            <ImageView
+                android:id="@+id/title_from_to_dots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/from_to_purple" />
 
-        <TextView
-            android:id="@+id/label_estilo"
-            style="@style/TitleBadgeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:text="@string/weight_mock" />
+            <TextView
+                android:id="@+id/marca_chopp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/title_from_to_dots"
+                android:layout_marginTop="-5dp"
+                android:layout_toEndOf="@+id/title_from_to_dots"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            style="@style/TitleBadgeTitle"
-            android:id="@+id/value_estilo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/label_estilo"
-            android:layout_alignStart="@id/label_estilo"
-            android:text="@string/weight_badge" />
+            <ImageView
+                android:id="@+id/title_from_to_dots_divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/marca_chopp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/title_from_to_dots"
+                android:src="@color/contentDividerLine" />
 
-        <TextView
-            android:id="@+id/label_abv"
-            style="@style/TitleBadgeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            <TextView
+                android:id="@+id/nome_chopp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_from_to_dots_divider"
+                android:layout_toEndOf="@id/title_from_to_dots"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            style="@style/TitleBadgeTitle"
-            android:id="@+id/value_abv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/label_abv"
-            android:layout_alignStart="@id/label_abv"
-            android:text="@string/pledge_badge" />
 
-    </RelativeLayout>
-</LinearLayout>
+            <TextView
+                android:id="@+id/label_ibu"
+                style="@style/TitleBadgeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                style="@style/TitleBadgeTitle"
+                android:id="@+id/value_ibu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/label_ibu"
+                android:layout_alignStart="@id/label_ibu"
+                android:text="@string/requests_count_badge" />
+
+            <TextView
+                android:id="@+id/label_estilo"
+                style="@style/TitleBadgeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/weight_mock" />
+
+            <TextView
+                style="@style/TitleBadgeTitle"
+                android:id="@+id/value_estilo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/label_estilo"
+                android:layout_alignStart="@id/label_estilo"
+                android:text="@string/weight_badge" />
+
+            <TextView
+                android:id="@+id/label_abv"
+                style="@style/TitleBadgeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                style="@style/TitleBadgeTitle"
+                android:id="@+id/value_abv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/label_abv"
+                android:layout_alignStart="@id/label_abv"
+                android:text="@string/pledge_badge" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
