@@ -118,7 +118,7 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
     }
 
     @Override
-    public void onBindViewHolder(TorneiraViewHolder holder, int position) {
+    public void onBindViewHolder(TorneiraViewHolder holder, final int position) {
         /** Criar Textviews/checkboxes de acordo com a quantidade de preços (isso indica que há + de
          * 1 copo de chopp. Para isso, usar a classe LinearLayout.Params para copiar o textview/checkbox
          * do primeiro elemento e replicar quantas vezes for necessário. **/
@@ -140,6 +140,13 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
             // (optionally) add "default" handler if no handler found in item
             holder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
         }
+        holder.getViewPai().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((FoldingCell)view).toggle(false);
+                registerToggle(position);
+            }
+        });
     }
 
     public List<Tonel> getItems() {
@@ -158,9 +165,11 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
 class TorneiraViewHolder extends RecyclerView.ViewHolder {
     TextView preco, btnSolicitar, abv, marcaChopp, nomeChopp, ibu, estilo, date, time;
+    View viewPai;
 
     public TorneiraViewHolder(View itemView) {
         super(itemView);
+        setViewPai(itemView);
         setPreco((TextView) itemView.findViewById(R.id.title_price));
         setTime((TextView) itemView.findViewById(R.id.title_time_label));
         setDate((TextView) itemView.findViewById(R.id.title_date_label));
@@ -242,5 +251,13 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder {
 
     public void setTime(TextView time) {
         this.time = time;
+    }
+
+    public View getViewPai() {
+        return viewPai;
+    }
+
+    public void setViewPai(View viewPai) {
+        this.viewPai = viewPai;
     }
 }

@@ -5,18 +5,18 @@
     android:layout_height="match_parent"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="2dp"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:visibility="gone">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <!-- content header line -->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/bgContentTop"
             android:paddingBottom="7dp"
             android:paddingLeft="12dp"
@@ -396,6 +396,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:text="@string/btn_annotation_mock"
                 android:textAlignment="center"
                 android:textColor="@color/contentBadgeTitle"
