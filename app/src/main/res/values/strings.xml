@@ -26,4 +26,10 @@
     <string name="content_to2_mock">Woodside, NY 11101</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="action_settings">Settings</string>
+
+    <string name="label_ibu" translatable="false">IBU</string>
+    <string name="label_abv" translatable="false">ABV</string>
+    <string name="label_estilo">Estilo</string>
+    <string name="label_cerveja">Cerveja</string>
+    <string name="label_btn_pedir">Pedir</string>
 </resources>

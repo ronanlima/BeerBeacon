@@ -58,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
         theListView.setAdapter(adapter);
 
         // set on click event listener to list view
-        theListView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // toggle clicked cell state
-                ((FoldingCell) view).toggle(false);
-                // register in adapter that state for selected cell is toggled
-                adapter.registerToggle(0);
-            }
-        });
+//        theListView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                // toggle clicked cell state
+//                ((FoldingCell) view).toggle(false);
+//                // register in adapter that state for selected cell is toggled
+//                adapter.registerToggle(0);
+//            }
+//        });
 //        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {

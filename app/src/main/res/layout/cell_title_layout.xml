@@ -109,58 +109,74 @@
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
-
-            <TextView
-                android:id="@+id/label_ibu"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/nome_chopp"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true" />
+                android:layout_marginTop="20dp">
 
-            <TextView
-                style="@style/TitleBadgeTitle"
-                android:id="@+id/value_ibu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/label_ibu"
-                android:layout_alignStart="@id/label_ibu"
-                android:text="@string/requests_count_badge" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:textAlignment="center">
 
-            <TextView
-                android:id="@+id/label_estilo"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:text="@string/weight_mock" />
+                    <TextView
+                        style="@style/TitleBadgeTitle"
+                        android:id="@+id/label_ibu"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_ibu" />
 
-            <TextView
-                style="@style/TitleBadgeTitle"
-                android:id="@+id/value_estilo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/label_estilo"
-                android:layout_alignStart="@id/label_estilo"
-                android:text="@string/weight_badge" />
+                    <TextView
+                        style="@style/TitleBadgeTitle"
+                        android:id="@+id/label_abv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_abv" />
 
-            <TextView
-                android:id="@+id/label_abv"
-                style="@style/TitleBadgeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true" />
+                    <TextView
+                        style="@style/TitleBadgeTitle"
+                        android:id="@+id/label_estilo"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_estilo" />
+                </LinearLayout>
 
-            <TextView
-                style="@style/TitleBadgeTitle"
-                android:id="@+id/value_abv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@id/label_abv"
-                android:layout_alignStart="@id/label_abv"
-                android:text="@string/pledge_badge" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="3">
+
+                    <TextView
+                        android:id="@+id/value_ibu"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/value_abv"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/value_estilo"
+                        style="@style/TitleBadgeText"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
     </LinearLayout>

@@ -4,20 +4,21 @@ import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Ronan.lima on 14/02/17.
  */
 public class Tonel {
     private String marca, nomeChopp, ibu, abv, estilo;
-    private Double volume;
+    private List<Double> volume;
     //FIXME remover esses atributos futuramente
     private String data, hora;
     private List<Double> preco;
     private List<String> descricaoChopp;
     private View.OnClickListener requestBtnClickListener;
 
-    public Tonel(String marca, String nomeChopp, String ibu, String abv, String estilo, Double volume) {
+    public Tonel(String marca, String nomeChopp, String ibu, String abv, String estilo) {
         setMarca(marca);
         setNomeChopp(nomeChopp);
         setIbu(ibu);
@@ -27,16 +28,39 @@ public class Tonel {
         setDescricaoChopp(new ArrayList<String>());
         setData("Hoje");
         setHora("12:53");
-        setVolume(volume);
+        setVolume(new ArrayList<Double>());
     }
 
     public static ArrayList<Tonel> getTonelList() {
         ArrayList<Tonel> lista = new ArrayList<>();
-        lista.add(new Tonel("Dogma", "Hopp Lagger", "10,1", "7,3", "Lagger", 200d));
-        lista.add(new Tonel("Colorado", "Colorado SeiLaOQuê", "9,8", "7,3", "ABC", 200d));
-        lista.add(new Tonel("Eisenbhan", "Eisenbhan Weizenbier", "6,2", "4,3", "Weizenbier", 200d));
-        lista.add(new Tonel("Brahma", "Extra", "5,2", "7,3", "Lagger", 200d));
+        Tonel t = new Tonel("Dogma", "Hopp Lagger", "10,1", "7,3", "Lagger");
+        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextDouble());
+        t.getVolume().add(new Double(200));
+        t.getVolume().add(new Double(400));
+        lista.add(t);
+        t = new Tonel("Colorado", "Colorado SeiLaOQuê", "9,8", "7,3", "ABC");
+        t.getPreco().add(getNextDouble());
+        t.getVolume().add(new Double(200));
+        lista.add(t);
+        t = new Tonel("Eisenbhan", "Eisenbhan Weizenbier", "6,2", "4,3", "Weizenbier");
+        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextDouble());
+        t.getVolume().add(new Double(200));
+        t.getVolume().add(new Double(400));
+        lista.add(t);
+        t = new Tonel("Brahma", "Extra", "5,2", "7,3", "Lagger");
+        t.getPreco().add(getNextDouble());
+        t.getVolume().add(new Double(200));
+        lista.add(t);
         return lista;
+    }
+
+    public static Double getNextDouble() {
+        double min = 10.9;
+        double max = 134.87;
+        Random random = new Random();
+        return min + (max - min) * random.nextDouble();
     }
 
     public String getMarca() { return marca; }
@@ -97,11 +121,11 @@ public class Tonel {
         this.hora = hora;
     }
 
-    public Double getVolume() {
+    public List<Double> getVolume() {
         return volume;
     }
 
-    public void setVolume(Double volume) {
+    public void setVolume(List<Double> volume) {
         this.volume = volume;
     }
     public View.OnClickListener getRequestBtnClickListener() {
