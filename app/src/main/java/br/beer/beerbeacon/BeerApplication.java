@@ -24,6 +24,7 @@ public class BeerApplication extends Application {
     public static final String TAG = BeerApplication.class.getCanonicalName().toUpperCase();
 
     private BeaconManager beaconManager;
+    private String idConsumoFBase;
 
     @Override
     public void onCreate() {
@@ -71,5 +72,13 @@ public class BeerApplication extends Application {
         notification.defaults |= Notification.DEFAULT_SOUND;
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(1, notification);
+    }
+
+    public String getIdConsumoFBase() {
+        return idConsumoFBase;
+    }
+
+    public void setIdConsumoFBase(String idConsumoFBase) {
+        this.idConsumoFBase = idConsumoFBase;
     }
 }

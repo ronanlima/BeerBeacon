@@ -1,16 +1,19 @@
 package br.beer.beerbeacon;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.estimote.sdk.SystemRequirementsChecker;
-import com.ramotion.foldingcell.FoldingCell;
+import com.leo.simplearcloader.ArcConfiguration;
+import com.leo.simplearcloader.SimpleArcDialog;
+import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.util.ArrayList;
 
@@ -19,19 +22,19 @@ import br.beer.beerbeacon.bean.Tonel;
 /**
  * Example of using Folding Cell with ListView and ListAdapter
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage {
+
+    private Snackbar snackbar;
+    private SimpleArcDialog simpleArcDialog;
+    private ArcConfiguration arcConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // get our list view
-//        ListView theListView = (ListView) findViewById(R.id.mainListView);
         RecyclerView theListView = (RecyclerView) findViewById(R.id.mainListView);
 
-        // prepare elements to display
-//        final ArrayList<Item> items = Item.getTestingList();
         final ArrayList<Tonel> items = Tonel.getTonelList();
 
         // add custom btn handler to first list item
@@ -56,33 +59,67 @@ public class MainActivity extends AppCompatActivity {
         // set elements to adapter
         theListView.setLayoutManager(new LinearLayoutManager(this));
         theListView.setAdapter(adapter);
-
-        // set on click event listener to list view
-//        theListView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                // toggle clicked cell state
-//                ((FoldingCell) view).toggle(false);
-//                // register in adapter that state for selected cell is toggled
-//                adapter.registerToggle(0);
-//            }
-//        });
-//        theListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-//                // toggle clicked cell state
-//                ((FoldingCell) view).toggle(false);
-//                // register in adapter that state for selected cell is toggled
-//                adapter.registerToggle(pos);
-//            }
-//        });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
+    }
+
+    @Override
+    public void showSnackbar(String msg) {
+        snackbar = Snackbar.make(this.getCurrentFocus(), msg, Snackbar.LENGTH_SHORT);
+        View sbView = snackbar.getView();
+
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.black_overlay));
+        textView.setBackgroundColor(getResources().getColor(R.color.btnRequest));
+        snackbar.show();
+    }
+
+    @Override
+    public void showLoading(String msg) {
+        setupDialog(msg);
+        getSimpleArcDialog().show();
+    }
+
+    @Override
+    public void hideLoading() {
+        getSimpleArcDialog().dismiss();
+    }
+
+    @Override
+    public void updateLoading(String msg) {
+        getArcConfiguration().setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
+        getArcConfiguration().setText(msg);
+        getSimpleArcDialog().setConfiguration(getArcConfiguration());
+    }
+
+    public void setupDialog(String text){
+        int[] colors = {Color.parseColor("#594691"), Color.parseColor("#ffbf12")};
+
+        setArcConfiguration(new ArcConfiguration(this));
+        getArcConfiguration().setLoaderStyle(SimpleArcLoader.STYLE.SIMPLE_ARC);
+        getArcConfiguration().setColors(colors);
+        getArcConfiguration().setText(text);
+        setSimpleArcDialog(new SimpleArcDialog(this));
+        getSimpleArcDialog().setConfiguration(getArcConfiguration());
+    }
+
+    public SimpleArcDialog getSimpleArcDialog() {
+        return simpleArcDialog;
+    }
+
+    public void setSimpleArcDialog(SimpleArcDialog simpleArcDialog) {
+        this.simpleArcDialog = simpleArcDialog;
+    }
+
+    public ArcConfiguration getArcConfiguration() {
+        return arcConfiguration;
+    }
+
+    public void setArcConfiguration(ArcConfiguration arcConfiguration) {
+        this.arcConfiguration = arcConfiguration;
     }
 }

@@ -2,6 +2,7 @@ package br.beer.beerbeacon.bean;
 
 import android.view.View;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +15,7 @@ public class Tonel {
     private List<Double> volume;
     //FIXME remover esses atributos futuramente
     private String data, hora;
-    private List<Double> preco;
+    private List<BigDecimal> preco;
     private List<String> descricaoChopp;
     private View.OnClickListener requestBtnClickListener;
 
@@ -24,7 +25,7 @@ public class Tonel {
         setIbu(ibu);
         setAbv(abv);
         setEstilo(estilo);
-        setPreco(new ArrayList<Double>());
+        setPreco(new ArrayList<BigDecimal>());
         setDescricaoChopp(new ArrayList<String>());
         setData("Hoje");
         setHora("12:53");
@@ -34,33 +35,33 @@ public class Tonel {
     public static ArrayList<Tonel> getTonelList() {
         ArrayList<Tonel> lista = new ArrayList<>();
         Tonel t = new Tonel("Dogma", "Hopp Lagger", "10,1", "7,3", "Lagger");
-        t.getPreco().add(getNextDouble());
-        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextBigDecimal());
+        t.getPreco().add(getNextBigDecimal());
         t.getVolume().add(new Double(200));
         t.getVolume().add(new Double(400));
         lista.add(t);
         t = new Tonel("Colorado", "Colorado SeiLaOQuê", "9,8", "7,3", "ABC");
-        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextBigDecimal());
         t.getVolume().add(new Double(200));
         lista.add(t);
         t = new Tonel("Eisenbhan", "Eisenbhan Weizenbier", "6,2", "4,3", "Weizenbier");
-        t.getPreco().add(getNextDouble());
-        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextBigDecimal());
+        t.getPreco().add(getNextBigDecimal());
         t.getVolume().add(new Double(200));
         t.getVolume().add(new Double(400));
         lista.add(t);
         t = new Tonel("Brahma", "Extra", "5,2", "7,3", "Lagger");
-        t.getPreco().add(getNextDouble());
+        t.getPreco().add(getNextBigDecimal());
         t.getVolume().add(new Double(200));
         lista.add(t);
         return lista;
     }
 
-    public static Double getNextDouble() {
-        double min = 10.9;
-        double max = 134.87;
+    public static BigDecimal getNextBigDecimal() {
+        BigDecimal min = new BigDecimal(10d);
+        BigDecimal max = new BigDecimal(134.87);
         Random random = new Random();
-        return min + (max - min) * random.nextDouble();
+        return new BigDecimal(min.doubleValue() + (max.doubleValue() - min.doubleValue()) * random.nextDouble());
     }
 
     public String getMarca() { return marca; }
@@ -91,11 +92,11 @@ public class Tonel {
 
     public void setEstilo(String estilo) { this.estilo = estilo; }
 
-    public List<Double> getPreco() {
+    public List<BigDecimal> getPreco() {
         return preco;
     }
 
-    public void setPreco(List<Double> preco) {
+    public void setPreco(List<BigDecimal> preco) {
         this.preco = preco;
     }
 
