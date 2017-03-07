@@ -1,14 +1,16 @@
 package br.beer.beerbeacon;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 import com.leo.simplearcloader.ArcConfiguration;
@@ -18,47 +20,38 @@ import com.leo.simplearcloader.SimpleArcLoader;
 import java.util.ArrayList;
 
 import br.beer.beerbeacon.bean.Tonel;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Example of using Folding Cell with ListView and ListAdapter
  */
 public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage {
 
+    private CardView cardView;
     private Snackbar snackbar;
     private SimpleArcDialog simpleArcDialog;
     private ArcConfiguration arcConfiguration;
+    private RecyclerView recyclerView;
+    private boolean isListenerAdd = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView theListView = (RecyclerView) findViewById(R.id.mainListView);
+        recyclerView = (RecyclerView) findViewById(R.id.mainListView);
+        cardView = (CardView) findViewById(R.id.card_total);
 
         final ArrayList<Tonel> items = Tonel.getTonelList();
-
-        // add custom btn handler to first list item
-        items.get(0).setRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "CUSTOM HANDLER FOR FIRST BUTTON", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // create custom adapter that holds elements and their state (we need hold a id's of unfolded elements for reusable elements)
         final FoldingCellListAdapter adapter = new FoldingCellListAdapter(this, items);
 
-        // add default btn handler for each request btn on each item if custom handler not found
-        adapter.setDefaultRequestBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "DEFAULT HANDLER FOR ALL BUTTONS", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // set elements to adapter
-        theListView.setLayoutManager(new LinearLayoutManager(this));
-        theListView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -73,8 +66,8 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
         View sbView = snackbar.getView();
 
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(getResources().getColor(R.color.black_overlay));
-        textView.setBackgroundColor(getResources().getColor(R.color.btnRequest));
+        textView.setTextColor(getResources().getColor(R.color.btnRequest));
+        textView.setBackgroundColor(getResources().getColor(R.color.black_overlay));
         snackbar.show();
     }
 
@@ -94,9 +87,40 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
         getArcConfiguration().setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
         getArcConfiguration().setText(msg);
         getSimpleArcDialog().setConfiguration(getArcConfiguration());
+        cardView.setVisibility(View.VISIBLE);
+
+        if (!isListenerAdd) {
+            enbleCardviewTotal();
+        }
     }
 
-    public void setupDialog(String text){
+    /**
+     * Adiciona listener para o scroll do recyclerView, após o usuário ter feito algum pedido, para
+     * que sempre que ele role a tela, o total da consumação seja exibido.
+     */
+    private void enbleCardviewTotal() {
+        isListenerAdd = true;
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    TranslateAnimation animation = new TranslateAnimation(0, 0, -cardView.getHeight() / 4, cardView.getHeight() * 2);
+                    animation.setDuration(500);
+                    animation.setFillAfter(true);
+                    cardView.startAnimation(animation);
+                    cardView.setVisibility(View.GONE);
+                } else if (dy < 0) {
+                    TranslateAnimation animation = new TranslateAnimation(0, 0, cardView.getHeight() * 2, -cardView.getHeight() / 4);
+                    animation.setDuration(500);
+                    animation.setFillAfter(true);
+                    cardView.startAnimation(animation);
+                    cardView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+    }
+
+    public void setupDialog(String text) {
         int[] colors = {Color.parseColor("#594691"), Color.parseColor("#ffbf12")};
 
         setArcConfiguration(new ArcConfiguration(this));

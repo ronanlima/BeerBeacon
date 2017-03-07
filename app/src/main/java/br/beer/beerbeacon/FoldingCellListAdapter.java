@@ -30,7 +30,6 @@ import br.beer.beerbeacon.firebase.FirebaseUtil;
 public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHolder> implements View.OnClickListener {
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
-    private View.OnClickListener defaultRequestBtnClickListener;
     private Context mContext;
     private List<Tonel> items;
     private InflateMessage iMessage;
@@ -55,14 +54,6 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
     public void registerUnfold(int position) {
         unfoldedIndexes.add(position);
-    }
-
-    public View.OnClickListener getDefaultRequestBtnClickListener() {
-        return defaultRequestBtnClickListener;
-    }
-
-    public void setDefaultRequestBtnClickListener(View.OnClickListener defaultRequestBtnClickListener) {
-        this.defaultRequestBtnClickListener = defaultRequestBtnClickListener;
     }
 
     @Override
@@ -91,13 +82,6 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
         holder.getAbv().setText(getItems().get(position).getAbv());
         holder.getEstilo().setText(getItems().get(position).getEstilo());
         holder.getHeaderNameChopp().setText(getItems().get(position).getMarca());
-        // set custom btn handler for list item from that item
-        if (getItems().get(position).getRequestBtnClickListener() != null) {
-            holder.btnSolicitar.setOnClickListener(getItems().get(position).getRequestBtnClickListener());
-        } else {
-            // (optionally) add "default" handler if no handler found in item
-            holder.btnSolicitar.setOnClickListener(defaultRequestBtnClickListener);
-        }
         holder.getViewPai().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -37,5 +37,6 @@ dependencies {
     compile "com.google.firebase:firebase-database:$firebaseVersion"
     compile "com.google.firebase:firebase-crash:$firebaseVersion"
     compile 'com.leo.simplearcloader:simplearcloader:1.0.+'
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     testCompile 'junit:junit:4.12'
 }

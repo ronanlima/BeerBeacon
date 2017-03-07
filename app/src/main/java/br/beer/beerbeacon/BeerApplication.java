@@ -16,12 +16,20 @@ import com.estimote.sdk.Region;
 import java.util.List;
 import java.util.UUID;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 /**
  * Created by Ronan.lima on 21/02/17.
  */
 
 public class BeerApplication extends Application {
     public static final String TAG = BeerApplication.class.getCanonicalName().toUpperCase();
+
+    public static BeerApplication instance = null;
+
+    public static BeerApplication getInstance() {
+        return instance;
+    }
 
     private BeaconManager beaconManager;
     private String idConsumoFBase;
@@ -30,32 +38,40 @@ public class BeerApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        EstimoteSDK.initialize(getApplicationContext(), "beerbeacon-lju", "a97dcc9e7ad472e291b61cc8680297dc");
-        EstimoteSDK.enableDebugLogging(true);
-        beaconManager = new BeaconManager(getApplicationContext());
+        if (getInstance() == null) {
+            instance = this;
+            CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                    .setDefaultFontPath("fonts/Roboto-Regular.ttf")
+                    .setFontAttrId(R.attr.fontPath)
+                    .build());
 
-        beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
-            @Override
-            public void onEnteredRegion(Region region, List<Beacon> list) {
-                showNotification("Vamos beber", "Entre no estabelecimento à sua frente para " +
-                        "experimentar os diversos sabores de chopp disponíveis");
-            }
+            EstimoteSDK.initialize(getApplicationContext(), "beerbeacon-lju", "a97dcc9e7ad472e291b61cc8680297dc");
+            EstimoteSDK.enableDebugLogging(true);
+            beaconManager = new BeaconManager(getApplicationContext());
 
-            @Override
-            public void onExitedRegion(Region region) {
-                Log.i(TAG, "Saiu do range do beacon "+region.getIdentifier());
-            }
-        });
-        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-            @Override
-            public void onServiceReady() {
-                beaconManager.startMonitoring(new Region(
-                        "regiao monitorada",
-                        UUID.fromString("44febbad-3a05-b196-516b-01df2cd8ea15"),
-                        null, null
-                ));
-            }
-        });
+            beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
+                @Override
+                public void onEnteredRegion(Region region, List<Beacon> list) {
+                    showNotification("Vamos beber", "Entre no estabelecimento à sua frente para " +
+                            "experimentar os diversos sabores de chopp disponíveis");
+                }
+
+                @Override
+                public void onExitedRegion(Region region) {
+                    Log.i(TAG, "Saiu do range do beacon " + region.getIdentifier());
+                }
+            });
+            beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+                @Override
+                public void onServiceReady() {
+                    beaconManager.startMonitoring(new Region(
+                            "regiao monitorada",
+                            UUID.fromString("44febbad-3a05-b196-516b-01df2cd8ea15"),
+                            null, null
+                    ));
+                }
+            });
+        }
     }
 
     public void showNotification(String title, String message) {
