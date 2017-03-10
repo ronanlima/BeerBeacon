@@ -32,4 +32,10 @@
     <string name="label_estilo">Estilo</string>
     <string name="label_cerveja">Cerveja</string>
     <string name="label_btn_pedir">Pedir</string>
+    <string name="coin_locale">R$</string>
+
+    <!-- Campos json firebase -->
+    <string name="fb_consumacao" translatable="false">consumacao</string>
+    <string name="pedido_qtd" translatable="false">qtd</string>
+    <string name="pedido_preco" translatable="false">preco</string>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.estimote.sdk.SystemRequirementsChecker;
@@ -17,15 +18,18 @@ import com.leo.simplearcloader.ArcConfiguration;
 import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import br.beer.beerbeacon.bean.Tonel;
+import br.beer.beerbeacon.firebase.FirebaseUtil;
+import br.beer.beerbeacon.firebase.ListenersFB;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Example of using Folding Cell with ListView and ListAdapter
  */
-public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage {
+public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage, ListenersFB {
 
     private CardView cardView;
     private Snackbar snackbar;
@@ -91,7 +95,15 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
 
         if (!isListenerAdd) {
             enbleCardviewTotal();
+            FirebaseUtil.listenPedido(this, this);
         }
+    }
+
+    @Override
+    public void listenPedidos(Double valor) {
+        LinearLayout ll = (LinearLayout) cardView.getChildAt(0);
+        TextView tvValor = (TextView) ll.getChildAt(1);
+        tvValor.setText(this.getBaseContext().getResources().getString(R.string.coin_locale)+new DecimalFormat("#,##0.00").format(valor));
     }
 
     /**
@@ -146,4 +158,5 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
     public void setArcConfiguration(ArcConfiguration arcConfiguration) {
         this.arcConfiguration = arcConfiguration;
     }
+
 }
