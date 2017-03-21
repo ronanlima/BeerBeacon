@@ -66,8 +66,8 @@ public class BeerApplication extends Application {
                 public void onServiceReady() {
                     beaconManager.startMonitoring(new Region(
                             "regiao monitorada",
-                            UUID.fromString("44febbad-3a05-b196-516b-01df2cd8ea15"),
-                            null, null
+                            UUID.fromString("44FEBBAD-3A05-B196-516B-01DF2CD8EA15"),
+                            5653, 53208
                     ));
                 }
             });
