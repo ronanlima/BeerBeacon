@@ -12,6 +12,7 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.EstimoteSDK;
 import com.estimote.sdk.Region;
+import com.estimote.sdk.SecureRegion;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +48,21 @@ public class BeerApplication extends Application {
 
             EstimoteSDK.initialize(getApplicationContext(), "beerbeacon-lju", "a97dcc9e7ad472e291b61cc8680297dc");
             EstimoteSDK.enableDebugLogging(true);
+
             beaconManager = new BeaconManager(getApplicationContext());
+
+            beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
+                @Override
+                public void onServiceReady() {
+                    beaconManager.startMonitoring(new SecureRegion(
+                            "regiao monitorada",
+                            UUID.fromString("44FEBBAD-3A05-B196-516B-01DF2CD8EA15"),
+                            5653, 53208
+                    ));
+
+
+                }
+            });
 
             beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
                 @Override
@@ -59,16 +74,6 @@ public class BeerApplication extends Application {
                 @Override
                 public void onExitedRegion(Region region) {
                     Log.i(TAG, "Saiu do range do beacon " + region.getIdentifier());
-                }
-            });
-            beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-                @Override
-                public void onServiceReady() {
-                    beaconManager.startMonitoring(new Region(
-                            "regiao monitorada",
-                            UUID.fromString("44FEBBAD-3A05-B196-516B-01DF2CD8EA15"),
-                            5653, 53208
-                    ));
                 }
             });
         }
