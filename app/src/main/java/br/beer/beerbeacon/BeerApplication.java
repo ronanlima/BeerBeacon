@@ -59,8 +59,6 @@ public class BeerApplication extends Application {
                             UUID.fromString("44FEBBAD-3A05-B196-516B-01DF2CD8EA15"),
                             5653, 53208
                     ));
-
-
                 }
             });
 
