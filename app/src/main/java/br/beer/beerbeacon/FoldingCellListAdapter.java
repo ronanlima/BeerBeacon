@@ -1,7 +1,9 @@
 package br.beer.beerbeacon;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +23,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
+import br.beer.beerbeacon.adapter.SimpleAdapter;
 import br.beer.beerbeacon.bean.Consumacao;
 import br.beer.beerbeacon.bean.Pedido;
 import br.beer.beerbeacon.bean.Tonel;
 import br.beer.beerbeacon.firebase.FirebaseUtil;
+import br.beer.beerbeacon.view.QuantityBeersDialogFragment;
 
 /**
  * Simple example of ListAdapter for using with Folding Cell
@@ -36,11 +40,13 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
     private Context mContext;
     private List<Tonel> items;
     private InflateMessage iMessage;
+    private FragmentManager fm;
 
-    public FoldingCellListAdapter(MainActivity context, List<Tonel> objects) {
+    public FoldingCellListAdapter(MainActivity context, List<Tonel> objects, FragmentManager supportFragmentManager) {
         this.mContext = context;
         setItems(objects);
         this.iMessage = context;
+        this.fm = supportFragmentManager;
     }
 
     // simple methods for register cell state changes
@@ -131,15 +137,14 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
         CompoundButton.OnCheckedChangeListener checkedListener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                View parent = (View) holder.getNumberPicker1().getParent();
-//                View parentCheck = (View) holder.getCheckBox1().getParent();
-//                if (isChecked) {
-//                    parentCheck.setVisibility(View.GONE);
-//                    parent.setVisibility(View.VISIBLE);
-//                } else {
-//                    parentCheck.setVisibility(View.VISIBLE);
-//                    parent.setVisibility(View.GONE);
-//                }
+                if (isChecked) {
+                    QuantityBeersDialogFragment fragment = new QuantityBeersDialogFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putString("idCheckbox", String.valueOf(buttonView.getId()));
+                    arguments.putSerializable("listener", holder);
+                    fragment.setArguments(arguments);
+                    fragment.show(fm, "");
+                }
             }
         };
 
@@ -198,7 +203,7 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
 }
 
-class TorneiraViewHolder extends RecyclerView.ViewHolder {
+class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapter.PedidosListener {
     /**
      * Componentes do layout encolhido
      */
@@ -211,6 +216,15 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder {
     View viewPai;
     private BigDecimal preco1, preco2;
     private int qtd1, qtd2;
+
+    @Override
+    public void listenQuantitySelected(Integer qtd, String idView) {
+        if (R.id.check_chopp_1 == Integer.valueOf(idView)) {
+            setQtd1(qtd);
+        } else {
+            setQtd2(qtd);
+        }
+    }
 
     public TorneiraViewHolder(View itemView) {
         super(itemView);
@@ -443,4 +457,5 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder {
     public void setQtd2(int qtd2) {
         this.qtd2 = qtd2;
     }
+
 }

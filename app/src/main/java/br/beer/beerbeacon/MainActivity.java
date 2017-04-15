@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
     public void readTonelsAvailables(List<Tonel> tonel) {
         if (tonel != null && tonel.size() > 0) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new FoldingCellListAdapter(this, tonel));
+            recyclerView.setAdapter(new FoldingCellListAdapter(this, tonel, getSupportFragmentManager()));
         }
     }
 
