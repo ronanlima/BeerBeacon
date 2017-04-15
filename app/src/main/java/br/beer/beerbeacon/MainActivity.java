@@ -19,7 +19,7 @@ import com.leo.simplearcloader.SimpleArcDialog;
 import com.leo.simplearcloader.SimpleArcLoader;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.util.List;
 
 import br.beer.beerbeacon.bean.Tonel;
 import br.beer.beerbeacon.firebase.FirebaseUtil;
@@ -50,18 +50,13 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
 
         recyclerView = (RecyclerView) findViewById(R.id.mainListView);
         cardView = (CardView) findViewById(R.id.card_total);
-
-        final ArrayList<Tonel> items = Tonel.getTonelList();
-        final FoldingCellListAdapter adapter = new FoldingCellListAdapter(this, items);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SystemRequirementsChecker.checkWithDefaultDialogs(this);
+        FirebaseUtil.readInfoInitial(this, this);
     }
 
     @Override
@@ -103,7 +98,15 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
     public void listenPedidos(Double valor) {
         LinearLayout ll = (LinearLayout) cardView.getChildAt(0);
         TextView tvValor = (TextView) ll.getChildAt(1);
-        tvValor.setText(this.getBaseContext().getResources().getString(R.string.coin_locale)+new DecimalFormat("#,##0.00").format(valor));
+        tvValor.setText(this.getBaseContext().getResources().getString(R.string.coin_locale) + new DecimalFormat("#,##0.00").format(valor));
+    }
+
+    @Override
+    public void readTonelsAvailables(List<Tonel> tonel) {
+        if (tonel != null && tonel.size() > 0) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setAdapter(new FoldingCellListAdapter(this, tonel));
+        }
     }
 
     /**

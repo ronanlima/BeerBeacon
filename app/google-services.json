@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "918710486293",
-    "firebase_url": "https://beerbeacon-766a6.firebaseio.com",
-    "project_id": "beerbeacon-766a6",
-    "storage_bucket": "beerbeacon-766a6.appspot.com"
+    "project_number": "162266260939",
+    "firebase_url": "https://beerbeacon-ed95a.firebaseio.com",
+    "project_id": "beerbeacon-ed95a",
+    "storage_bucket": "beerbeacon-ed95a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:918710486293:android:58d9d8f7d171da77",
+        "mobilesdk_app_id": "1:162266260939:android:58d9d8f7d171da77",
         "android_client_info": {
           "package_name": "br.beer.beerbeacon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "918710486293-ho8qhq2ascogbnuvfofm8i0k3umor2lc.apps.googleusercontent.com",
+          "client_id": "162266260939-h1r4g8go0urmcp6lmm7r2mo9k50dlkja.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.beer.beerbeacon",
-            "certificate_hash": "ff9c3b7354e2603ee55221b19a601b852e1d64ba"
+            "certificate_hash": "1d59e422d06c71f297c62a8a4d2a405c85fbca4b"
           }
         },
         {
-          "client_id": "918710486293-3b8gjslsrrfsmahs709khjri17r0onol.apps.googleusercontent.com",
+          "client_id": "162266260939-m2giromhoh022ujalcnn914mqg0aspmk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBLSvVNoMrbT-riJQYsdueXUva5Eow61wc"
+          "current_key": "AIzaSyC4W45xTsXiSZDsi1grABTe1n-7KG8jRoI"
         }
       ],
       "services": {
@@ -40,8 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "918710486293-3b8gjslsrrfsmahs709khjri17r0onol.apps.googleusercontent.com",
+              "client_id": "162266260939-m2giromhoh022ujalcnn914mqg0aspmk.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "162266260939-t88kv610kc2lp217k66m7633cd5sco2e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.BeerBeacon"
+              }
             }
           ]
         },

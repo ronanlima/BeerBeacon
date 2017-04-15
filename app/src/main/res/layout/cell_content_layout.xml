@@ -160,7 +160,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_toEndOf="@id/content_avatar"
                     android:textColor="@color/mainTextColor"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -220,11 +220,22 @@
                         <!--android:text="@string/from_badge" />-->
 
                     <TextView
+                        android:id="@+id/text_opcao_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:text="Opção 01"
+                        android:alpha="0.5"/>
+
+                    <TextView
                         android:id="@+id/text_volume_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/mainTextColor"
-                        android:textSize="18sp"
+                        android:layout_below="@id/text_opcao_1"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -234,7 +245,7 @@
                         android:layout_alignStart="@id/text_volume_1"
                         android:layout_below="@id/text_volume_1"
                         android:textColor="@color/mainTextColor"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <CheckBox
                         android:id="@+id/check_chopp_1"
@@ -276,11 +287,22 @@
                         <!--android:text="@string/delivery_date_badge" />-->
 
                     <TextView
+                        android:id="@+id/text_opcao_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/mainTextColor"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:text="Opção 02"
+                        android:alpha="0.5"/>
+
+                    <TextView
                         android:id="@+id/text_volume_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/mainTextColor"
-                        android:textSize="18sp"
+                        android:layout_below="@id/text_opcao_2"
+                        android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -290,7 +312,7 @@
                         android:layout_alignStart="@id/text_volume_2"
                         android:layout_below="@id/text_volume_2"
                         android:textColor="@color/mainTextColor"
-                        android:textSize="14sp" />
+                        android:textSize="12sp" />
 
                     <CheckBox
                         android:id="@+id/check_chopp_2"
@@ -320,7 +342,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="6dp"
                 android:text="@string/btn_annotation_mock"
                 android:textAlignment="center"
                 android:textColor="@color/contentBadgeTitle"

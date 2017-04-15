@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.ramotion.foldingcell.FoldingCell;
@@ -14,7 +15,9 @@ import com.ramotion.foldingcell.FoldingCell;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -73,15 +76,19 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
          * 1 copo de chopp. Para isso, usar a classe LinearLayout.Params para copiar o textview/checkbox
          * do primeiro elemento e replicar quantas vezes for necessário. **/
         holder.getPreco().setText(new String("" + (position + 1)));
-        holder.getNomeChopp().setText(getItems().get(position).getNomeChopp());
+        holder.getNomeChopp().setText(getItems().get(position).getCerveja());
         /** **/
-        holder.getTime().setText(getItems().get(position).getHora());
-        holder.getDate().setText(getItems().get(position).getData());
-        holder.getMarcaChopp().setText(getItems().get(position).getMarca());
+
+        Long dataEntrada = getItems().get(position).getDataEntrada();
+        Date time = new Date(dataEntrada);
+        holder.getTime().setText(new SimpleDateFormat("HH:mm").format(time));
+        holder.getDate().setText(new SimpleDateFormat("dd/MM/yy").format(time));
+
+        holder.getMarcaChopp().setText(getItems().get(position).getCervejaria());
         holder.getIbu().setText(getItems().get(position).getIbu());
         holder.getAbv().setText(getItems().get(position).getAbv());
         holder.getEstilo().setText(getItems().get(position).getEstilo());
-        holder.getHeaderNameChopp().setText(getItems().get(position).getMarca());
+        holder.getHeaderNameChopp().setText(getItems().get(position).getCervejaria());
         holder.getViewPai().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,19 +97,19 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
             }
         });
 
-        BigDecimal preco = getItems().get(position).getPreco().get(0);
-        holder.getHeaderNameChopp().setText(getItems().get(position).getMarca());
+        BigDecimal preco = BigDecimal.valueOf(Double.valueOf(getItems().get(position).getMedidas().get(0).getPreco().get(0).replace(",", ".")));
+        holder.getHeaderNameChopp().setText(getItems().get(position).getCervejaria());
         holder.getHeadIbu().setText(holder.getIbu().getText());
         holder.getHeadAbv().setText(holder.getAbv().getText());
         holder.getHeadEstilo().setText(holder.getEstilo().getText());
         holder.getNomeCompostoMarcaCerveja().setText(holder.getMarcaChopp().getText() + " - " + holder.getNomeChopp().getText());
-        holder.getTextVolume1().setText("Copo " + getItems().get(position).getVolume().get(0).intValue() + " ml");
+        holder.getTextVolume1().setText(getItems().get(position).getMedidas().get(0).getQuantidade().get(0));
         holder.getTextPrecoVol1().setText("R$ " + holder.getPrecoFmt(preco.doubleValue()));
         holder.setPreco1(preco);
         ((View) holder.getTextVolume2().getParent().getParent()).setVisibility(View.GONE);
-        if (getItems().get(position).getVolume().size() > 1) {
-            holder.getTextVolume2().setText("Copo " + getItems().get(position).getVolume().get(1).intValue() + " ml");
-            preco = getItems().get(position).getPreco().get(1);
+        if (getItems().get(position).getMedidas().size() > 1) {
+            holder.getTextVolume2().setText(getItems().get(position).getMedidas().get(1).getQuantidade().get(0));
+            preco = BigDecimal.valueOf(Double.valueOf(getItems().get(position).getMedidas().get(1).getPreco().get(0).replace(",", ".")));
             holder.getTextPrecoVol2().setText("R$ " + holder.getPrecoFmt(preco.doubleValue()));
             holder.setPreco2(preco);
             ((View) holder.getTextVolume2().getParent().getParent()).setVisibility(View.VISIBLE);
@@ -120,6 +127,24 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
                 iMessage.updateLoading("Pedido enviado!");
             }
         });
+
+        CompoundButton.OnCheckedChangeListener checkedListener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                View parent = (View) holder.getNumberPicker1().getParent();
+//                View parentCheck = (View) holder.getCheckBox1().getParent();
+//                if (isChecked) {
+//                    parentCheck.setVisibility(View.GONE);
+//                    parent.setVisibility(View.VISIBLE);
+//                } else {
+//                    parentCheck.setVisibility(View.VISIBLE);
+//                    parent.setVisibility(View.GONE);
+//                }
+            }
+        };
+
+        holder.getCheckBox1().setOnCheckedChangeListener(checkedListener);
+        holder.getCheckBox2().setOnCheckedChangeListener(checkedListener);
     }
 
     private void clearScreen(View view, TorneiraViewHolder holder) {
@@ -185,6 +210,7 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder {
     CheckBox checkBox1, checkBox2;
     View viewPai;
     private BigDecimal preco1, preco2;
+    private int qtd1, qtd2;
 
     public TorneiraViewHolder(View itemView) {
         super(itemView);
@@ -386,11 +412,35 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder {
         this.viewPai = viewPai;
     }
 
-    public BigDecimal getPreco1() { return preco1; }
+    public BigDecimal getPreco1() {
+        return preco1;
+    }
 
-    public void setPreco1(BigDecimal preco1) { this.preco1 = preco1; }
+    public void setPreco1(BigDecimal preco1) {
+        this.preco1 = preco1;
+    }
 
-    public BigDecimal getPreco2() { return preco2; }
+    public BigDecimal getPreco2() {
+        return preco2;
+    }
 
-    public void setPreco2(BigDecimal preco2) { this.preco2 = preco2; }
+    public void setPreco2(BigDecimal preco2) {
+        this.preco2 = preco2;
+    }
+
+    public int getQtd1() {
+        return qtd1;
+    }
+
+    public void setQtd1(int qtd1) {
+        this.qtd1 = qtd1;
+    }
+
+    public int getQtd2() {
+        return qtd2;
+    }
+
+    public void setQtd2(int qtd2) {
+        this.qtd2 = qtd2;
+    }
 }

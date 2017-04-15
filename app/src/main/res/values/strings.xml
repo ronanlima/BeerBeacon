@@ -34,8 +34,24 @@
     <string name="label_btn_pedir">Pedir</string>
     <string name="coin_locale">R$</string>
 
+    <!-- Nós json firebase -->
+    <string name="fb_pedidos" translatable="false">pedidos</string>
+    <string name="fb_taps" translatable="false">taps</string>
+    <string name="fb_taps_medidas" translatable="false">medidas</string>
+    <!-- Nós json firebase -->
+
     <!-- Campos json firebase -->
-    <string name="fb_consumacao" translatable="false">consumacao</string>
     <string name="pedido_qtd" translatable="false">qtd</string>
     <string name="pedido_preco" translatable="false">preco</string>
+    <string name="taps_abv" translatable="false">ABV</string>
+    <string name="taps_ibu" translatable="false">IBU</string>
+    <string name="taps_cerveja" translatable="false">cerveja</string>
+    <string name="taps_cervejaria" translatable="false">cervejaria</string>
+    <string name="taps_data_entrada" translatable="false">data_entrada</string>
+    <string name="taps_estilo" translatable="false">estilo</string>
+    <string name="taps_nota" translatable="false">nota</string>
+    <string name="taps_medida_preco" translatable="false">preco</string>
+    <string name="taps_medida_quantidade" translatable="false">quantidade</string>
+    <!-- Campos json firebase-->
+
 </resources>
