@@ -28,7 +28,7 @@ public class FirebaseUtil {
     public static final String TAG = FirebaseUtil.class.getCanonicalName().toUpperCase();
 
     public static void gravaPedido(Context context, Consumacao consumacao) {
-        DatabaseReference ref = getDBReference(context.getResources().getString(R.string.fb_pedidos));
+        DatabaseReference ref = getDBReference(context.getResources().getString(R.string.fb_consumacao));
         String id = ((BeerApplication) context.getApplicationContext()).getIdConsumoFBase();
         for (Pedido p : consumacao.getPedidos()) {
             if (id == null || id.equals("")) {
@@ -40,7 +40,7 @@ public class FirebaseUtil {
     }
 
     public static void listenPedido(final Context context, final ListenersFB listener) {
-        DatabaseReference ref = getDBReference(context.getResources().getString(R.string.fb_pedidos));
+        DatabaseReference ref = getDBReference(context.getResources().getString(R.string.fb_consumacao));
         final String idConsumoFBase = ((BeerApplication) context.getApplicationContext()).getIdConsumoFBase();
         ref.child(idConsumoFBase).addValueEventListener(new ValueEventListener() {
             @Override

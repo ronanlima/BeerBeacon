@@ -35,7 +35,7 @@
     <string name="coin_locale">R$</string>
 
     <!-- Nós json firebase -->
-    <string name="fb_pedidos" translatable="false">pedidos</string>
+    <string name="fb_consumacao" translatable="false">consumacao</string>
     <string name="fb_taps" translatable="false">taps</string>
     <string name="fb_taps_medidas" translatable="false">medidas</string>
     <!-- Nós json firebase -->

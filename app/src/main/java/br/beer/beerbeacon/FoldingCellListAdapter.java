@@ -63,6 +63,12 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
     public void registerUnfold(int position) {
         unfoldedIndexes.add(position);
+        // TODO mapear unfold para esconder cardview que informa a consumação.
+//        TranslateAnimation animation = new TranslateAnimation(0, 0, -cardView.getHeight() / 4, cardView.getHeight() * 2);
+//        animation.setDuration(500);
+//        animation.setFillAfter(true);
+//        cardView.startAnimation(animation);
+//        cardView.setVisibility(View.GONE);
     }
 
     @Override

@@ -72,7 +72,13 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
 
     @Override
     public void showLoading(String msg) {
-        setupDialog(msg);
+        if (getArcConfiguration() == null) {
+            setupDialog(msg);
+        } else {
+            configDefaultDialog(msg, SimpleArcLoader.STYLE.COMPLETE_ARC);
+            getArcConfiguration().setText(msg);
+            getSimpleArcDialog().setConfiguration(getArcConfiguration());
+        }
         getSimpleArcDialog().show();
     }
 
@@ -83,9 +89,12 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
 
     @Override
     public void updateLoading(String msg) {
-        getArcConfiguration().setLoaderStyle(SimpleArcLoader.STYLE.COMPLETE_ARC);
-        getArcConfiguration().setText(msg);
+        configDefaultDialog(msg, SimpleArcLoader.STYLE.COMPLETE_ARC);
+        getSimpleArcDialog().dismiss();
+        setSimpleArcDialog(null);
+        setSimpleArcDialog(new SimpleArcDialog(this));
         getSimpleArcDialog().setConfiguration(getArcConfiguration());
+        getSimpleArcDialog().show();
         cardView.setVisibility(View.VISIBLE);
 
         if (!isListenerAdd) {
@@ -136,14 +145,17 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
     }
 
     public void setupDialog(String text) {
-        int[] colors = {Color.parseColor("#594691"), Color.parseColor("#ffbf12")};
-
         setArcConfiguration(new ArcConfiguration(this));
-        getArcConfiguration().setLoaderStyle(SimpleArcLoader.STYLE.SIMPLE_ARC);
-        getArcConfiguration().setColors(colors);
-        getArcConfiguration().setText(text);
+        configDefaultDialog(text, SimpleArcLoader.STYLE.SIMPLE_ARC);
         setSimpleArcDialog(new SimpleArcDialog(this));
         getSimpleArcDialog().setConfiguration(getArcConfiguration());
+    }
+
+    private void configDefaultDialog(String text, SimpleArcLoader.STYLE style) {
+        int[] colors = {Color.parseColor("#594691"), Color.parseColor("#ffbf12")};
+        getArcConfiguration().setLoaderStyle(style);
+        getArcConfiguration().setColors(colors);
+        getArcConfiguration().setText(text);
     }
 
     public SimpleArcDialog getSimpleArcDialog() {
