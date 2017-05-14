@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
+    android:background="@android:color/background_dark"
+    android:alpha="0.8"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true">
@@ -47,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:textColor="@color/colorWhite"
-                    android:background="@color/bgTitleLeft"
+                    android:background="@color/colorPrimary"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:textSize="12sp"

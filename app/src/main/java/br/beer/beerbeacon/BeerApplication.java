@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.estimote.sdk.Beacon;
@@ -26,7 +27,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 public class BeerApplication extends Application {
     public static final String TAG = BeerApplication.class.getCanonicalName().toUpperCase();
 
-    public static BeerApplication instance = null;
+    private static BeerApplication instance = null;
 
     public static BeerApplication getInstance() {
         return instance;
@@ -34,6 +35,7 @@ public class BeerApplication extends Application {
 
     private BeaconManager beaconManager;
     private String idConsumoFBase;
+    private boolean isAlreadyNotified = false;
 
     @Override
     public void onCreate() {
@@ -65,8 +67,11 @@ public class BeerApplication extends Application {
             beaconManager.setMonitoringListener(new BeaconManager.MonitoringListener() {
                 @Override
                 public void onEnteredRegion(Region region, List<Beacon> list) {
-                    showNotification("Vamos beber", "Entre no estabelecimento à sua frente para " +
-                            "experimentar os diversos sabores de chopp disponíveis");
+                    if (!isAlreadyNotified) {
+                        showNotification("Vamos beber", "Entre no estabelecimento à sua frente para " +
+                                "experimentar os diversos sabores de chopp disponíveis");
+                    }
+                    isAlreadyNotified = true;
                 }
 
                 @Override
@@ -81,16 +86,17 @@ public class BeerApplication extends Application {
         Intent notifyIntent = new Intent(this, MainActivity.class);
         notifyIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivities(this, 0, new Intent[]{notifyIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification notification = new Notification.Builder(this)
-                .setSmallIcon(android.R.drawable.ic_dialog_info)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-                .build();
-        notification.defaults |= Notification.DEFAULT_SOUND;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.bigText(message);
+        builder.setStyle(bigTextStyle);
+        builder.setSmallIcon(R.drawable.icon);
+        builder.setContentTitle(title);
+        builder.setAutoCancel(true);
+        builder.setContentIntent(pendingIntent);
+        builder.setDefaults(Notification.DEFAULT_SOUND);
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(1, notification);
+        nm.notify(1, builder.build());
     }
 
     public String getIdConsumoFBase() {

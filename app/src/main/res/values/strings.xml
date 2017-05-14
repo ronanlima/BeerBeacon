@@ -48,6 +48,10 @@
     <string name="taps_cerveja" translatable="false">cerveja</string>
     <string name="taps_cervejaria" translatable="false">cervejaria</string>
     <string name="taps_data_entrada" translatable="false">data_entrada</string>
+    <string name="taps_img_cerveja" translatable="false">img_cerveja</string>
+    <string name="taps_img_cervejaria" translatable="false">img_cervejaria</string>
+    <string name="taps_status" translatable="false">status</string>
+    <string name="taps_bid" translatable="false">bid</string>
     <string name="taps_estilo" translatable="false">estilo</string>
     <string name="taps_nota" translatable="false">nota</string>
     <string name="taps_medida_preco" translatable="false">preco</string>

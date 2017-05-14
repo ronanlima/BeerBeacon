@@ -10,12 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ramotion.foldingcell.FoldingCell;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -84,23 +85,24 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
     @Override
     public void onBindViewHolder(final TorneiraViewHolder holder, final int position) {
+        Tonel tonel = getItems().get(position);
         /** Criar Textviews/checkboxes de acordo com a quantidade de preços (isso indica que há + de
          * 1 copo de chopp. Para isso, usar a classe LinearLayout.Params para copiar o textview/checkbox
          * do primeiro elemento e replicar quantas vezes for necessário. **/
         holder.getPreco().setText(new String("" + (position + 1)));
-        holder.getNomeChopp().setText(getItems().get(position).getCerveja());
+        holder.getNomeChopp().setText(tonel.getCerveja());
         /** **/
 
-        Long dataEntrada = getItems().get(position).getDataEntrada();
+        Long dataEntrada = tonel.getDataEntrada();
         Date time = new Date(dataEntrada);
         holder.getTime().setText(new SimpleDateFormat("HH:mm").format(time));
         holder.getDate().setText(new SimpleDateFormat("dd/MM/yy").format(time));
 
-        holder.getMarcaChopp().setText(getItems().get(position).getCervejaria());
-        holder.getIbu().setText(getItems().get(position).getIbu());
-        holder.getAbv().setText(getItems().get(position).getAbv());
-        holder.getEstilo().setText(getItems().get(position).getEstilo());
-        holder.getHeaderNameChopp().setText(getItems().get(position).getCervejaria());
+        holder.getMarcaChopp().setText(tonel.getCervejaria());
+        holder.getIbu().setText(tonel.getIbu());
+        holder.getAbv().setText(tonel.getAbv());
+        holder.getEstilo().setText(tonel.getEstilo());
+        holder.getHeaderNameChopp().setText(tonel.getCervejaria());
         holder.getViewPai().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,20 +111,20 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
             }
         });
 
-        BigDecimal preco = BigDecimal.valueOf(Double.valueOf(getItems().get(position).getMedidas().get(0).getPreco().get(0).replace(",", ".")));
-        holder.getHeaderNameChopp().setText(getItems().get(position).getCervejaria());
+        String preco = tonel.getMedidas().get(0).getPreco().get(0);
+        holder.getHeaderNameChopp().setText(tonel.getCervejaria());
         holder.getHeadIbu().setText(holder.getIbu().getText());
         holder.getHeadAbv().setText(holder.getAbv().getText());
         holder.getHeadEstilo().setText(holder.getEstilo().getText());
         holder.getNomeCompostoMarcaCerveja().setText(holder.getMarcaChopp().getText() + " - " + holder.getNomeChopp().getText());
-        holder.getTextVolume1().setText(getItems().get(position).getMedidas().get(0).getQuantidade().get(0));
-        holder.getTextPrecoVol1().setText("R$ " + holder.getPrecoFmt(preco.doubleValue()));
+        holder.getTextVolume1().setText(tonel.getMedidas().get(0).getQuantidade().get(0));
+        holder.getTextPrecoVol1().setText(preco);
         holder.setPreco1(preco);
         ((View) holder.getTextVolume2().getParent().getParent()).setVisibility(View.GONE);
-        if (getItems().get(position).getMedidas().size() > 1) {
-            holder.getTextVolume2().setText(getItems().get(position).getMedidas().get(1).getQuantidade().get(0));
-            preco = BigDecimal.valueOf(Double.valueOf(getItems().get(position).getMedidas().get(1).getPreco().get(0).replace(",", ".")));
-            holder.getTextPrecoVol2().setText("R$ " + holder.getPrecoFmt(preco.doubleValue()));
+        if (tonel.getMedidas().size() > 1) {
+            holder.getTextVolume2().setText(tonel.getMedidas().get(1).getQuantidade().get(0));
+            preco = tonel.getMedidas().get(1).getPreco().get(0);
+            holder.getTextPrecoVol2().setText(preco);
             holder.setPreco2(preco);
             ((View) holder.getTextVolume2().getParent().getParent()).setVisibility(View.VISIBLE);
         }
@@ -156,6 +158,20 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
         holder.getCheckBox1().setOnCheckedChangeListener(checkedListener);
         holder.getCheckBox2().setOnCheckedChangeListener(checkedListener);
+
+        Glide.with(mContext)
+                .load(tonel.getUrlImageCerveja())
+                .centerCrop()
+                .placeholder(R.drawable.avatar)
+                .crossFade()
+                .into(holder.getImgCerveja());
+
+        Glide.with(mContext)
+                .load(tonel.getUrlImgCervejaria())
+                .centerCrop()
+                .placeholder(R.drawable.avatar)
+                .crossFade()
+                .into(holder.getImgCervejaria());
     }
 
     private void clearScreen(View view, TorneiraViewHolder holder) {
@@ -173,12 +189,12 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
                 .getText().toString();
         if (holder.getCheckBox1().isChecked()) {
             pedido = new Pedido(titulo + " - " + holder.getTextVolume1().getText().toString()
-                    , new Integer(2), Calendar.getInstance().getTimeInMillis(), holder.getPreco1().doubleValue());
+                    , new Integer(2), Calendar.getInstance().getTimeInMillis(), holder.getPreco1());
             consumacao.getPedidos().add(pedido);
         }
         if (holder.getCheckBox2().isChecked()) {
             pedido = new Pedido(titulo + " - " + holder.getTextVolume2().getText().toString()
-                    , new Integer(1), Calendar.getInstance().getTimeInMillis(), holder.getPreco2().doubleValue());
+                    , new Integer(1), Calendar.getInstance().getTimeInMillis(), holder.getPreco2());
             consumacao.getPedidos().add(pedido);
         }
         return consumacao;
@@ -219,8 +235,9 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
      */
     TextView headerNameChopp, headIbu, headAbv, headEstilo, nomeCompostoMarcaCerveja, textVolume1, textVolume2, textPrecoVol1, textPrecoVol2;
     CheckBox checkBox1, checkBox2;
+    ImageView imgCerveja, imgCervejaria;
     View viewPai;
-    private BigDecimal preco1, preco2;
+    private String preco1, preco2;
     private int qtd1, qtd2;
 
     @Override
@@ -256,6 +273,8 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
         setTextPrecoVol2((TextView) itemView.findViewById(R.id.text_preco_volume_2));
         setCheckBox1((CheckBox) itemView.findViewById(R.id.check_chopp_1));
         setCheckBox2((CheckBox) itemView.findViewById(R.id.check_chopp_2));
+        setImgCerveja((ImageView) itemView.findViewById(R.id.img_cerveja));
+        setImgCervejaria((ImageView) itemView.findViewById(R.id.img_cervejaria));
     }
 
     public TextView getPreco() {
@@ -432,19 +451,19 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
         this.viewPai = viewPai;
     }
 
-    public BigDecimal getPreco1() {
+    public String getPreco1() {
         return preco1;
     }
 
-    public void setPreco1(BigDecimal preco1) {
+    public void setPreco1(String preco1) {
         this.preco1 = preco1;
     }
 
-    public BigDecimal getPreco2() {
+    public String getPreco2() {
         return preco2;
     }
 
-    public void setPreco2(BigDecimal preco2) {
+    public void setPreco2(String preco2) {
         this.preco2 = preco2;
     }
 
@@ -464,4 +483,19 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
         this.qtd2 = qtd2;
     }
 
+    public ImageView getImgCerveja() {
+        return imgCerveja;
+    }
+
+    public void setImgCerveja(ImageView imgCerveja) {
+        this.imgCerveja = imgCerveja;
+    }
+
+    public ImageView getImgCervejaria() {
+        return imgCervejaria;
+    }
+
+    public void setImgCervejaria(ImageView imgCervejaria) {
+        this.imgCervejaria = imgCervejaria;
+    }
 }

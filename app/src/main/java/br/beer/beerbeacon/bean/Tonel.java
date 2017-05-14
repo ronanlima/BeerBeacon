@@ -11,7 +11,7 @@ import java.util.Random;
  * Created by Ronan.lima on 14/02/17.
  */
 public class Tonel {
-    private String cervejaria, cerveja, ibu, abv, estilo, nota;
+    private String cervejaria, cerveja, ibu, abv, bid, estilo, nota, urlImageCerveja, urlImgCervejaria;
     private Long dataEntrada;
     private List<Medida> medidas;
     private View.OnClickListener requestBtnClickListener;
@@ -118,5 +118,29 @@ public class Tonel {
 
     public void setRequestBtnClickListener(View.OnClickListener requestBtnClickListener) {
         this.requestBtnClickListener = requestBtnClickListener;
+    }
+
+    public String getUrlImageCerveja() {
+        return urlImageCerveja;
+    }
+
+    public void setUrlImageCerveja(String urlImageCerveja) {
+        this.urlImageCerveja = urlImageCerveja;
+    }
+
+    public String getUrlImgCervejaria() {
+        return urlImgCervejaria;
+    }
+
+    public void setUrlImgCervejaria(String urlImgCervejaria) {
+        this.urlImgCervejaria = urlImgCervejaria;
+    }
+
+    public String getBid() {
+        return bid;
+    }
+
+    public void setBid(String bid) {
+        this.bid = bid;
     }
 }

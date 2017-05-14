@@ -8,9 +8,9 @@ public class Pedido {
     private String titulo;
     private Integer qtd;
     private Long dateTime;
-    private Double preco;
+    private String preco;
 
-    public Pedido(String titulo, Integer qtd, Long dateTime, Double preco) {
+    public Pedido(String titulo, Integer qtd, Long dateTime, String preco) {
         setTitulo(titulo);
         setQtd(qtd);
         setDateTime(dateTime);
@@ -41,11 +41,11 @@ public class Pedido {
         this.dateTime = dateTime;
     }
 
-    public Double getPreco() {
+    public String getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(String preco) {
         this.preco = preco;
     }
 }

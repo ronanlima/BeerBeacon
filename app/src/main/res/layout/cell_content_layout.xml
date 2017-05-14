@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bgContentTop"
+            android:background="@color/colorPrimaryDark"
             android:paddingBottom="7dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
@@ -55,9 +55,9 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/head_image"
+                android:id="@+id/img_cervejaria"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="115dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/head_image" />
 
@@ -66,8 +66,8 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/head_image"
-                android:layout_alignStart="@id/head_image"
+                android:layout_alignBottom="@id/img_cervejaria"
+                android:layout_alignStart="@id/img_cervejaria"
                 android:paddingBottom="10dp"
                 android:paddingStart="20dp"/>
 
@@ -85,8 +85,8 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/head_image"
-                android:layout_alignEnd="@id/head_image"
+                android:layout_alignBottom="@id/img_cervejaria"
+                android:layout_alignEnd="@id/img_cervejaria"
                 android:paddingBottom="10dp"
                 android:paddingEnd="20dp"/>
 
@@ -103,7 +103,7 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/head_image"
+                android:layout_alignBottom="@id/img_cervejaria"
                 android:layout_centerHorizontal="true"
                 android:paddingBottom="10dp"/>
 
@@ -144,9 +144,9 @@
                     android:text="@string/label_cerveja" />
 
                 <ImageView
-                    android:id="@+id/content_avatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/img_cerveja"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
                     android:layout_below="@id/content_avatar_title"
                     android:scaleType="centerCrop"
                     android:src="@drawable/avatar" />
@@ -155,10 +155,10 @@
                     android:id="@+id/nome_composto_marca_cerveja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/content_avatar"
+                    android:layout_alignTop="@id/img_cerveja"
                     android:layout_marginBottom="2dp"
                     android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/content_avatar"
+                    android:layout_toEndOf="@id/img_cerveja"
                     android:textColor="@color/mainTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />

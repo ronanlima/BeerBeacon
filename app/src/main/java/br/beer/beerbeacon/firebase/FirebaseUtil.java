@@ -48,7 +48,7 @@ public class FirebaseUtil {
                 Double valor = Double.valueOf(0);
                 for (DataSnapshot snap : dataSnapshot.getChildren()) {
                     valor += Integer.valueOf(String.valueOf(snap.child(context.getResources().getString(R.string.pedido_qtd)).getValue()))
-                            * Double.valueOf(String.valueOf(snap.child(context.getResources().getString(R.string.pedido_preco)).getValue()));
+                            * Double.valueOf(String.valueOf(snap.child(context.getResources().getString(R.string.pedido_preco)).getValue()).replace("R$", "").replace(",", "."));
                 }
                 listener.listenPedidos(valor);
             }
@@ -70,7 +70,7 @@ public class FirebaseUtil {
      */
     public static void readInfoInitial(final Context context, final ListenersFB listener) {
         DatabaseReference ref = getDBReference(context.getResources().getString(R.string.fb_taps));
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.orderByChild(context.getResources().getString(R.string.taps_status)).equalTo("ativado").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && dataSnapshot.hasChildren()) {
@@ -94,11 +94,14 @@ public class FirebaseUtil {
         Tonel t = new Tonel();
         t.setAbv(data.child(context.getResources().getString(R.string.taps_abv)).getValue().toString());
         t.setIbu(data.child(context.getResources().getString(R.string.taps_ibu)).getValue().toString());
+        t.setBid(data.child(context.getResources().getString(R.string.taps_bid)).getValue().toString());
         t.setCerveja(data.child(context.getResources().getString(R.string.taps_cerveja)).getValue().toString());
         t.setCervejaria(data.child(context.getResources().getString(R.string.taps_cervejaria)).getValue().toString());
         t.setEstilo(data.child(context.getResources().getString(R.string.taps_estilo)).getValue().toString());
         t.setNota(data.child(context.getResources().getString(R.string.taps_nota)).getValue().toString());
         t.setDataEntrada(Long.parseLong(data.child(context.getResources().getString(R.string.taps_data_entrada)).getValue().toString()));
+        t.setUrlImageCerveja(data.child(context.getResources().getString(R.string.taps_img_cerveja)).getValue().toString());
+        t.setUrlImgCervejaria(data.child(context.getResources().getString(R.string.taps_img_cervejaria)).getValue().toString());
         for (DataSnapshot dataM : data.child(context.getResources().getString(R.string.fb_taps_medidas)).getChildren()) {
             t.getMedidas().add(buildMedida(context, dataM));
         }
