@@ -36,6 +36,7 @@ public class BeerApplication extends Application {
     private BeaconManager beaconManager;
     private String idConsumoFBase;
     private boolean isAlreadyNotified = false;
+    private String tableQrCode;
 
     @Override
     public void onCreate() {
@@ -105,5 +106,13 @@ public class BeerApplication extends Application {
 
     public void setIdConsumoFBase(String idConsumoFBase) {
         this.idConsumoFBase = idConsumoFBase;
+    }
+
+    public String getTableQrCode() {
+        return tableQrCode;
+    }
+
+    public void setTableQrCode(String tableQrCode) {
+        this.tableQrCode = tableQrCode;
     }
 }

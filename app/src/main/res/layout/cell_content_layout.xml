@@ -17,7 +17,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/btnRequest"
             android:paddingBottom="7dp"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
@@ -31,22 +31,6 @@
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentEnd="true"-->
-                <!--android:text="@string/price_mock"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="20sp"-->
-                <!--android:textStyle="bold" />-->
-
-            <!--<ImageView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_alignParentStart="true"-->
-                <!--android:layout_centerVertical="true"-->
-                <!--android:src="@drawable/menu_icon" />-->
-
         </RelativeLayout>
 
         <!-- content header image -->
@@ -55,7 +39,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/img_cervejaria"
+                android:id="@+id/img_cerveja"
                 android:layout_width="match_parent"
                 android:layout_height="115dp"
                 android:scaleType="centerCrop"
@@ -66,8 +50,8 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/img_cervejaria"
-                android:layout_alignStart="@id/img_cervejaria"
+                android:layout_alignBottom="@id/img_cerveja"
+                android:layout_alignStart="@id/img_cerveja"
                 android:paddingBottom="10dp"
                 android:paddingStart="20dp"/>
 
@@ -85,8 +69,8 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/img_cervejaria"
-                android:layout_alignEnd="@id/img_cervejaria"
+                android:layout_alignBottom="@id/img_cerveja"
+                android:layout_alignEnd="@id/img_cerveja"
                 android:paddingBottom="10dp"
                 android:paddingEnd="20dp"/>
 
@@ -103,7 +87,7 @@
                 style="@style/ContentImageBadgeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/img_cervejaria"
+                android:layout_alignBottom="@id/img_cerveja"
                 android:layout_centerHorizontal="true"
                 android:paddingBottom="10dp"/>
 
@@ -144,21 +128,20 @@
                     android:text="@string/label_cerveja" />
 
                 <ImageView
-                    android:id="@+id/img_cerveja"
+                    android:id="@+id/img_cervejaria"
                     android:layout_width="49dp"
                     android:layout_height="49dp"
                     android:layout_below="@id/content_avatar_title"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/avatar" />
+                    android:scaleType="centerCrop"/>
 
                 <TextView
                     android:id="@+id/nome_composto_marca_cerveja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/img_cerveja"
+                    android:layout_alignTop="@id/img_cervejaria"
                     android:layout_marginBottom="2dp"
                     android:layout_marginStart="10dp"
-                    android:layout_toEndOf="@id/img_cerveja"
+                    android:layout_toEndOf="@id/img_cervejaria"
                     android:textColor="@color/mainTextColor"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -170,24 +153,6 @@
                     android:layout_alignStart="@id/nome_composto_marca_cerveja"
                     android:layout_below="@id/nome_composto_marca_cerveja"
                     android:src="@drawable/stars" />
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignBottom="@+id/content_rating_stars"-->
-                    <!--android:layout_marginBottom="-2dp"-->
-                    <!--android:layout_marginStart="3dp"-->
-                    <!--android:layout_toEndOf="@id/content_rating_stars"-->
-                    <!--android:text="@string/rating_mock"-->
-                    <!--android:textColor="@color/contentBadgeTitle"-->
-                    <!--android:textSize="12sp" />-->
-
-                <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_alignParentEnd="true"-->
-                    <!--android:layout_centerVertical="true"-->
-                    <!--android:src="@drawable/arrow" />-->
 
             </RelativeLayout>
 
@@ -210,14 +175,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/content_from_badge"-->
-                        <!--style="@style/ContentMainBadgeTitle"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentStart="true"-->
-                        <!--android:text="@string/from_badge" />-->
 
                     <TextView
                         android:id="@+id/text_opcao_1"
@@ -277,14 +234,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
-
-                    <!--<TextView-->
-                        <!--android:id="@+id/content_delivery_date_badge"-->
-                        <!--style="@style/ContentMainBadgeTitle"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_alignParentStart="true"-->
-                        <!--android:text="@string/delivery_date_badge" />-->
 
                     <TextView
                         android:id="@+id/text_opcao_2"

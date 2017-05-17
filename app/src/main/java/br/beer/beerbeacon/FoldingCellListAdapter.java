@@ -18,9 +18,7 @@ import com.ramotion.foldingcell.FoldingCell;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -41,12 +39,14 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
     private Context mContext;
     private List<Tonel> items;
     private InflateMessage iMessage;
+    private ListenerQrCode listenerQrCode;
     private FragmentManager fm;
 
     public FoldingCellListAdapter(MainActivity context, List<Tonel> objects, FragmentManager supportFragmentManager) {
         this.mContext = context;
         setItems(objects);
         this.iMessage = context;
+        this.listenerQrCode = context;
         this.fm = supportFragmentManager;
     }
 
@@ -86,17 +86,13 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
     @Override
     public void onBindViewHolder(final TorneiraViewHolder holder, final int position) {
         Tonel tonel = getItems().get(position);
+        String numTorneira = String.format("%02d", position+1);
         /** Criar Textviews/checkboxes de acordo com a quantidade de preços (isso indica que há + de
          * 1 copo de chopp. Para isso, usar a classe LinearLayout.Params para copiar o textview/checkbox
          * do primeiro elemento e replicar quantas vezes for necessário. **/
-        holder.getPreco().setText(new String("" + (position + 1)));
+        holder.getPreco().setText(numTorneira);
         holder.getNomeChopp().setText(tonel.getCerveja());
         /** **/
-
-        Long dataEntrada = tonel.getDataEntrada();
-        Date time = new Date(dataEntrada);
-        holder.getTime().setText(new SimpleDateFormat("HH:mm").format(time));
-        holder.getDate().setText(new SimpleDateFormat("dd/MM/yy").format(time));
 
         holder.getMarcaChopp().setText(tonel.getCervejaria());
         holder.getIbu().setText(tonel.getIbu());
@@ -135,6 +131,11 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
                     iMessage.showSnackbar("Antes de fazer o pedido, informe o volume desejado e sua quantidade!");
                     return;
                 }
+                if (BeerApplication.getInstance().getTableQrCode() == null) {
+                    listenerQrCode.callStartActivityForResult(mContext);
+                } else {
+
+                }
                 iMessage.showLoading("Efetuando seu pedido");// FIXME loading não está aparecendo, arrumar context adequado
                 FirebaseUtil.gravaPedido(mContext, createConsumacao(holder));
                 clearScreen(view, holder);
@@ -161,15 +162,15 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
 
         Glide.with(mContext)
                 .load(tonel.getUrlImageCerveja())
-                .centerCrop()
-                .placeholder(R.drawable.avatar)
-                .crossFade()
+                .into(holder.getImgCervejaCellTitle());
+
+        Glide.with(mContext)
+                .load(tonel.getUrlImageCerveja())
                 .into(holder.getImgCerveja());
 
         Glide.with(mContext)
                 .load(tonel.getUrlImgCervejaria())
                 .centerCrop()
-                .placeholder(R.drawable.avatar)
                 .crossFade()
                 .into(holder.getImgCervejaria());
     }
@@ -213,6 +214,10 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
         registerToggle(0);
     }
 
+    interface ListenerQrCode extends Serializable {
+        void callStartActivityForResult(Context context);
+    }
+
     interface InflateMessage extends Serializable {
         void showSnackbar(String msg);
 
@@ -229,7 +234,8 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
     /**
      * Componentes do layout encolhido
      */
-    TextView preco, btnSolicitar, abv, marcaChopp, nomeChopp, ibu, estilo, date, time;
+    TextView preco, btnSolicitar, abv, marcaChopp, nomeChopp, ibu, estilo;
+    ImageView imgCervejaCellTitle;
     /**
      * Componentes do layout expandido
      */
@@ -252,9 +258,8 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
     public TorneiraViewHolder(View itemView) {
         super(itemView);
         setViewPai(itemView);
+        setImgCervejaCellTitle((ImageView) itemView.findViewById(R.id.img_cerveja_cell_title));
         setPreco((TextView) itemView.findViewById(R.id.title_price));
-        setTime((TextView) itemView.findViewById(R.id.title_time_label));
-        setDate((TextView) itemView.findViewById(R.id.title_date_label));
         setMarcaChopp((TextView) itemView.findViewById(R.id.marca_chopp));
         setNomeChopp((TextView) itemView.findViewById(R.id.nome_chopp));
         setIbu((TextView) itemView.findViewById(R.id.value_ibu));
@@ -337,22 +342,6 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
 
     public void setEstilo(TextView estilo) {
         this.estilo = estilo;
-    }
-
-    public TextView getDate() {
-        return date;
-    }
-
-    public void setDate(TextView date) {
-        this.date = date;
-    }
-
-    public TextView getTime() {
-        return time;
-    }
-
-    public void setTime(TextView time) {
-        this.time = time;
     }
 
     public TextView getHeaderNameChopp() {
@@ -497,5 +486,13 @@ class TorneiraViewHolder extends RecyclerView.ViewHolder implements SimpleAdapte
 
     public void setImgCervejaria(ImageView imgCervejaria) {
         this.imgCervejaria = imgCervejaria;
+    }
+
+    public ImageView getImgCervejaCellTitle() {
+        return imgCervejaCellTitle;
+    }
+
+    public void setImgCervejaCellTitle(ImageView imgCervejaCellTitle) {
+        this.imgCervejaCellTitle = imgCervejaCellTitle;
     }
 }

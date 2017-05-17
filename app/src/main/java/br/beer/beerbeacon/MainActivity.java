@@ -1,6 +1,7 @@
 package br.beer.beerbeacon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
@@ -29,7 +31,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Example of using Folding Cell with ListView and ListAdapter
  */
-public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage, ListenersFB {
+public class MainActivity extends AppCompatActivity implements FoldingCellListAdapter.InflateMessage, ListenersFB, FoldingCellListAdapter.ListenerQrCode {
 
     private CardView cardView;
     private Snackbar snackbar;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
     private ArcConfiguration arcConfiguration;
     private RecyclerView recyclerView;
     private boolean isListenerAdd = false;
+    private static final int COD_QR_CODE_SUCCESS = 100;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -108,6 +111,24 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
         LinearLayout ll = (LinearLayout) cardView.getChildAt(0);
         TextView tvValor = (TextView) ll.getChildAt(1);
         tvValor.setText(this.getBaseContext().getResources().getString(R.string.coin_locale) + new DecimalFormat("#,##0.00").format(valor));
+    }
+
+    @Override
+    public void callStartActivityForResult(Context context) {
+        startActivityForResult(new Intent(context, QrCodeActivity.class), 100);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        switch (requestCode) {
+            case COD_QR_CODE_SUCCESS:
+                // FIXME tratar retorno
+                break;
+            case 0:
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
