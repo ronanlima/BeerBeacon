@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -115,20 +116,13 @@ public class MainActivity extends AppCompatActivity implements FoldingCellListAd
 
     @Override
     public void callStartActivityForResult(Context context) {
-        startActivityForResult(new Intent(context, QrCodeActivity.class), 100);
+        startActivity(new Intent(context, HandlerQrCodeActivity.class));
     }
 
     @Override
-    public void startActivityForResult(Intent intent, int requestCode) {
-        switch (requestCode) {
-            case COD_QR_CODE_SUCCESS:
-                // FIXME tratar retorno
-                break;
-            case 0:
-                break;
-            default:
-                break;
-        }
+    public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+        super.startActivityForResult(intent, requestCode, options);
+        Log.d("TAG", requestCode+"");
     }
 
     @Override

@@ -33,6 +33,7 @@ public class FirebaseUtil {
         for (Pedido p : consumacao.getPedidos()) {
             if (id == null || id.equals("")) {
                 id = ref.push().getKey();
+                ref.child("mesa").setValue(((BeerApplication) context.getApplicationContext()).getTableQrCode());
                 ((BeerApplication) context.getApplicationContext()).setIdConsumoFBase(id);
             }
             ref.child(id).push().setValue(p);

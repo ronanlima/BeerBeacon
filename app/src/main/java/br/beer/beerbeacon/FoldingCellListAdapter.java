@@ -134,12 +134,11 @@ public class FoldingCellListAdapter extends RecyclerView.Adapter<TorneiraViewHol
                 if (BeerApplication.getInstance().getTableQrCode() == null) {
                     listenerQrCode.callStartActivityForResult(mContext);
                 } else {
-
+                    iMessage.showLoading("Efetuando seu pedido");
+                    FirebaseUtil.gravaPedido(mContext, createConsumacao(holder));
+                    clearScreen(view, holder);
+                    iMessage.updateLoading("Pedido enviado!");
                 }
-                iMessage.showLoading("Efetuando seu pedido");// FIXME loading não está aparecendo, arrumar context adequado
-                FirebaseUtil.gravaPedido(mContext, createConsumacao(holder));
-                clearScreen(view, holder);
-                iMessage.updateLoading("Pedido enviado!");
             }
         });
 
